@@ -1,0 +1,192 @@
+<template>
+    <div class="huan--container">
+        <chart-title>
+            {{ title }}
+        </chart-title>
+        <div class="layout--row">
+            <div class="huan--chart">
+                <chart-mixins
+                        ref="pie"
+                        :options="options"
+                ></chart-mixins>
+            </div>
+            <div class="huan--legend">
+                <table class="huan--legend__table">
+                    <tr v-if="finished">
+                        <td><span style="background: #3af16e"></span>已完成</td>
+                        <td>{{ percentage.finished }}<span>%</span></td>
+                        <td>{{ finished }}<span>项</span></td>
+                    </tr>
+                    <tr v-if="processing">
+                        <td><span style="background: #04f4fb"></span>按计划推进</td>
+                        <td>{{ percentage.processing }}<span>%</span></td>
+                        <td>{{ processing }}<span>项</span></td>
+                    </tr>
+                    <tr v-if="delayed">
+                        <td><span style="background: #fbb919"></span>滞后</td>
+                        <td>{{ percentage.delayed }}<span>%</span></td>
+                        <td>{{ delayed }}<span>项</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+    import 'echarts/lib/chart/pie'
+    import 'echarts/lib/component/grid'
+    import 'echarts/lib/component/tooltip'
+    import ChartTitle from "./ChartTitle";
+    import ChartMixins from "./ChartMixins";
+
+    export default {
+        name: "Huan",
+        components: {ChartMixins, ChartTitle},
+        props: {
+            title: {
+                type: String,
+                default: '推进情况'
+            },
+            finished: {
+                type: [Number, String],
+                default: 18
+            },
+            processing: {
+                type: [Number, String],
+                default: 56
+            },
+            delayed: {
+                type: [Number, String],
+                default: 3
+            }
+        },
+        computed: {
+            percentage() {
+                const sum = this.finished + this.processing + this.delayed
+                return {
+                    finished: (this.finished / sum * 100).toFixed(2),
+                    processing: (this.processing / sum * 100).toFixed(2),
+                    delayed: (this.delayed / sum * 100).toFixed(2),
+
+                }
+            }
+        },
+        data: () => ({
+            options: {
+                grid: {
+                    left: '2%',
+                    right: '2%',
+                    bottom: '2%',
+                    top: '2%',
+                },
+                tooltip: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 20
+                    },
+                    renderMode: 'html'
+
+                },
+                series: [{
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    label: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: []
+                }]
+            }
+        }),
+        mounted() {
+            this.options.series[0].data = []
+            if (this.delayed) {
+                this.options.series[0].data.push(this.setPieDetail('滞后', this.delayed, '#fbb919'))
+            }
+
+            if (this.finished) {
+                this.options.series[0].data.push(this.setPieDetail('已完成', this.finished, '#3af16e'))
+            }
+            if (this.processing) {
+                this.options.series[0].data.push(this.setPieDetail('按计划推进', this.processing, '#04f4fb'))
+            }
+
+            this.$refs.pie.setChart()
+        },
+        methods: {
+            setPieDetail(name = '', value = 100, color = '#04f4fb') {
+                return {
+                    name: name,
+                    value: value,
+                    itemStyle: {
+                        color: color
+                    },
+                    tooltip: {
+                        formatter: function (params) {
+                            return `${params.marker} ${params.name}: ${params.percent}%`
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<style scoped>
+    .huan--container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
+        margin-right: 30px;
+    }
+
+    .huan--chart {
+        flex: 0 1 auto;
+        width: 40%;
+        position: relative;
+    }
+
+    .huan--legend {
+        flex: 1 1 auto;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .huan--legend__table {
+        color: white;
+        font-size: 25px;
+    }
+
+    .huan--legend__table tr td {
+        padding: 20px;
+    }
+
+    .huan--legend__table tr td:first-child *:first-child {
+        display: inline-block;
+        margin-right: 15px;
+        width: 20px;
+        height: 20px;
+        background: white;
+    }
+
+    .huan--legend__table tr td span:last-child {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .layout--row {
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+</style>

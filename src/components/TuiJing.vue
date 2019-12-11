@@ -1,0 +1,226 @@
+<template>
+    <div class="tuijing--container">
+        <div class="tuijing--header">
+            <span class="tuijing--select--span"></span>
+            <span>{{ selectedDistrict }}</span>
+            <span>——</span>
+            <span class="tuijing--title">
+                {{ title }}
+            </span>
+        </div>
+
+
+        <div class="tuijing-chart" ref="tuijing"></div>
+    </div>
+</template>
+
+<script>
+    import echarts from 'echarts/lib/echarts'
+    import 'echarts/lib/chart/bar'
+    import 'echarts/lib/component/axis'
+    import 'echarts/lib/component/title'
+    import 'echarts/lib/component/tooltip'
+    import 'echarts/lib/component/grid'
+    import 'echarts/lib/component/visualMap'
+
+
+    export default {
+        name: "TuiJing",
+        props: {
+            title: {
+                type: String,
+                default: '任务推进情况'
+            },
+            selectedDistrict: {
+                type: String,
+                default: '浦东新区'
+            },
+            startColor: {
+                type: String,
+                default: '#14c396',
+                validator(value) {
+                    return !!value.match(/^(#|(rgb|hsl)a?\()/)
+                }
+            },
+            endColor: {
+                type: String,
+                default: '#1484c8',
+                validator(value) {
+                    return !!value.match(/^(#|(rgb|hsl)a?\()/);
+                }
+            },
+            grow: Boolean
+        },
+        watch: {
+            selectedDistrict: {
+                handler(old, newVal) {
+                    if (old === newVal) {
+                        return
+                    }
+                    this.setOptionsData(newVal)
+                    this.setChart()
+                }
+            }
+        },
+        data: () => ({
+            chart: undefined,
+            options: {
+                grid: {
+                    left: '2%',
+                    right: '2%'
+                },
+                visualMap: {
+                    show: false,
+                    min: 0,
+                    max: 50,
+                    dimension: 0,
+                    inRange: {
+                        color: ['#4a657a', '#ef5055']
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    x: 0,
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(4,244,251,0.3)'
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 20
+                        }
+                    },
+                    splitNumber: 20,
+                    axisPointer: {},
+                    data: []
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(4,244,251,0.3)'
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 20
+                        },
+                        formatter: '{value} %'
+                    }
+                },
+                tooltip: {
+                    show: true,
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'line'
+                    },
+                    textStyle: {
+                        fontSize: 20,
+                    },
+                    renderMode: 'html',
+                    formatter: function (params) {
+                        const param = params[0]
+                        return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:15px;height:15px;background-color:${param.color};"></span>`
+                            + param.axisValue + '<br />' + param.name + '<br />' + param.value + '%'
+                    }
+                },
+                series: [{
+                    type: 'bar',
+                    itemStyle: {
+                        barBorderRadius: 20
+                    },
+                    tooltip: {
+                        show: true,
+
+                    },
+                    barWidth: '50%',
+                    data: [],
+
+                }]
+            }
+        }),
+        mounted() {
+            this.$emit('onChangeDistrict', this.selectedDistrict)
+
+            this.options.visualMap.inRange.color = [this.startColor, this.endColor]
+
+            this.setOptionsData(this.selectedDistrict)
+
+            this.setChart()
+
+        },
+        methods: {
+            setChart() {
+                if (!this.chart) {
+                    this.chart = echarts.init(this.$refs.tuijing, null, {renderer: 'canvas'})
+                }
+                this.chart.setOption(this.options)
+            },
+            setValue(name = 'hehe', percent = 100) {
+                return {
+                    name: name,
+                    value: percent
+                }
+            },
+            setOptionsData(val) {
+                console.log(val)
+                const temp = 77
+                const arr = []
+                const arrIndex = []
+                for (let i = 0; i < temp; i++) {
+                    arr.push(this.setValue('hehe', Math.round(Math.random() * 100)))
+                    arrIndex.push(i)
+                }
+                this.options.series[0].data = arr
+                this.options.xAxis.data = arrIndex
+            },
+
+        }
+    }
+</script>
+
+<style scoped>
+    .tuijing--container {
+
+        display: flex;
+        flex-direction: column;
+        font-size: 30px;
+        flex: 0 1 auto;
+        min-height: 50%;
+    }
+
+    .tuijing-grow {
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    .tuijing--header {
+        display: flex;
+        flex-wrap: wrap;
+        flex-shrink: 1;
+        flex-grow: 0;
+
+    }
+
+    .tuijing--header span + span {
+        margin: 0 10px;
+    }
+
+    .tuijing-chart {
+        flex-grow: 1;
+        flex-shrink: 0;
+        display: block;
+    }
+
+    .tuijing--select--span {
+        width: 10px;
+        background: #04f4fb;
+    }
+
+</style>
