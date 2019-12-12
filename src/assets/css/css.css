@@ -1,7 +1,7 @@
 *{margin:0;padding:0;}
 html,body{font-size: microsoft yahei;width:100%;height: 100%;}
 a{text-decoration: none;color:#04f4fb;}
-.wrap{background: url(../images/bg.png) no-repeat;background-size: cover;width:100%;height: 4.5rem;}
+.wrap{background: url(../images/bg.png) no-repeat;background-size: cover;width:100%;height: 4.5rem;position: relative;display: flex;flex-direction: column}
 .header{background: url(../images/title-bg.png) no-repeat center top;height: .38rem;position: relative;background-size: 16rem .38rem;}
 .logo{text-align: center;width:2.1125rem;vertical-align: middle;margin:0 auto;padding-top:.071rem;}
 .logo img{width:100%;display: block;}
@@ -62,4 +62,4 @@ a{text-decoration: none;color:#04f4fb;}
 .task-pie-data span{display:block;}
 .task-chart-one{padding-right:.23rem;}
 
-.main{padding-top: .083rem;display: flex}
+.main{padding-top: .083rem;display: flex;position: relative;flex: 1 0 auto}

@@ -36,7 +36,7 @@
             </div>
 
         </div>
-        <div style="position: absolute;width: 10vw;height: 10vh;z-index: 9999;background: transparent"></div>
+        <div style="position: absolute;width: 6%;height: 8%;z-index: 9999;background: rgba(3, 19, 44, 1);"></div>
         <iframe class="hangpai--iframe"
                 :src="currentURL"></iframe>
     </div>
@@ -139,9 +139,9 @@
         left: 0;
         right: 0;
         bottom: 0;
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
+        width: 100%;
+        height: 4.5rem;
+        position: fixed;
         background: url("../assets/images/bg.png");
     }
 
@@ -155,8 +155,8 @@
     .xuanxiangka {
         position: absolute;
         z-index: 10000;
-        top: 1vh;
-        left: 2vw;
+        top: 1.5%;
+        left: 2.3%;
         display: flex;
         flex-direction: column;
     }
@@ -178,8 +178,7 @@
     }
 
     .svg--container svg {
-        width: 30px;
-        height: 30px;
+        width: 90%;
     }
 
 
@@ -243,5 +242,6 @@
         right: 10px;
         bottom: 10px;
         overflow: hidden;
+
     }
 </style>
