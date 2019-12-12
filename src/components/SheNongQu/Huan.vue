@@ -38,8 +38,8 @@
     import 'echarts/lib/chart/pie'
     import 'echarts/lib/component/grid'
     import 'echarts/lib/component/tooltip'
-    import ChartTitle from "./ChartTitle";
-    import ChartMixins from "./ChartMixins";
+    import ChartTitle from "../ChartTitle";
+    import ChartMixins from "../ChartMixins";
 
     export default {
         name: "Huan",
@@ -84,7 +84,7 @@
                 tooltip: {
                     show: true,
                     textStyle: {
-                        fontSize: 20
+                        fontSize: '8%'
                     },
                     renderMode: 'html'
 
@@ -146,13 +146,15 @@
     }
 
     .huan--chart {
-        flex: 0 1 auto;
+        flex: 0 0 auto;
         width: 40%;
+        max-width: 40%;
+        height: 100%;
         position: relative;
     }
 
     .huan--legend {
-        flex: 1 1 auto;
+        flex: 1 0 auto;
         position: relative;
         display: flex;
         justify-content: center;
@@ -161,24 +163,24 @@
 
     .huan--legend__table {
         color: white;
-        font-size: 25px;
+        font-size: 0.6vw;
     }
 
     .huan--legend__table tr td {
-        padding: 20px;
+        padding: 0.4vw;
     }
 
     .huan--legend__table tr td:first-child *:first-child {
         display: inline-block;
-        margin-right: 15px;
-        width: 20px;
-        height: 20px;
+        margin-right: 0.4vw;
+        width: 0.4vw;
+        height: 0.4vw;
         background: white;
     }
 
     .huan--legend__table tr td span:last-child {
-        font-size: 18px;
-        margin-left: 10px;
+        font-size: 0.3vw;
+        margin-left: 0.3vw;
     }
 
     .layout--row {
@@ -186,7 +188,6 @@
         flex-grow: 1;
         flex-shrink: 1;
         flex-direction: row;
-        flex-wrap: wrap;
     }
 
 </style>

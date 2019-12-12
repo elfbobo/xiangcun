@@ -15,14 +15,13 @@
 </template>
 
 <script>
-    import echarts from 'echarts/lib/echarts'
     import 'echarts/lib/component/legend'
     import 'echarts/lib/component/tooltip'
     import 'echarts/lib/component/axis'
     import 'echarts/lib/chart/line'
     import 'echarts/lib/component/grid'
-    import ChartTitle from "./ChartTitle";
-    import ChartMixins from "./ChartMixins";
+    import ChartTitle from "../ChartTitle";
+    import ChartMixins from "../ChartMixins";
 
     export default {
         name: "MianJi",
@@ -39,10 +38,33 @@
             target: {
                 type: [Boolean, Number],
                 default: false
+            },
+            smooth: Boolean,
+            lineWidth: {
+              type: Number,
+              default: 2
+            },
+            startOffset: {
+                type: Number,
+                default: 0
+            },
+            endOffset: {
+                type: Number,
+                default: 1
+            },
+            left: {
+                type: String,
+                default: '10%'
             }
         },
         data: () => ({
             options: {
+                grid: {
+                    left: '10%',
+                    right: '2%',
+                    top: '10%',
+                    bottom: '10%'
+                },
                 xAxis: {
                     type: 'category',
                     splitLine: {
@@ -57,7 +79,7 @@
                         show: true,
                         textStyle: {
                             color: '#fff',
-                            fontSize: 20
+                            fontSize: '7%'
                         }
                     },
                     data: ['宝山', '浦东', '嘉定', '崇明', '奉贤', '松江', '青浦', '闵行', '金山']
@@ -76,7 +98,7 @@
                         show: true,
                         textStyle: {
                             color: '#fff',
-                            fontSize: 20
+                            fontSize: '7%'
                         },
                         formatter: '{value} %'
                     },
@@ -89,13 +111,13 @@
                         type: 'line'
                     },
                     textStyle: {
-                        fontSize: '15px',
+                        fontSize: '8%',
                     },
                     backgroundColor: 'rgba(4,244,251,0.25)',
                     renderMode: 'html',
                     formatter: function (params) {
                         const param = params[0]
-                        return `<span style="padding: 10px;font-size: 25px;">${param.value}%</span>`
+                        return `<span style="font-size: 0.6vw;">${param.value}%</span>`
                     }
                 },
                 series: [{
@@ -127,17 +149,18 @@
             let temp = this.startColor.split(',')
             temp[temp.length - 1] = '0.25)'
             this.options.tooltip.backgroundColor = temp.join(',')
+            this.setChartStyle()
             this.$refs.mianji.setChart()
         },
         methods: {
             setGradientColor(start, end) {
-                return new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                return new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
                     {
-                        offset: 0,
+                        offset: this.startOffset,
                         color: start
                     },
                     {
-                        offset: 1,
+                        offset: this.endOffset,
                         color: end
                     }
                 ])
@@ -183,7 +206,13 @@
                     })
                 }
                 this.$refs.mianji.setChart()
+            },
+            setChartStyle() {
+                this.options.series[0].smooth = this.smooth
+                this.options.series[0].lineStyle.width = this.lineWidth
+                this.options.grid.left = this.left
             }
+
 
         },
     }

@@ -67,11 +67,11 @@
     }
 
     .tuijings--select {
-        margin: 10px 10px;
-        padding: 10px 60px;
+        margin: 0 0.4vw 0.9vw 0.4vw;
+        padding: 0.3vw 1.8vw;
         background: rgba(4, 244, 251, 0.1);
         color: white;
-        font-size: 30px;
+        font-size: 0.6vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -88,12 +88,12 @@
 
     .tuijings--active {
         color: #04f4fb;
-        padding: 10px 20px;
+        padding: 0.2vw 1vw;
     }
 
     .tuijings--active::after,.tuijings--active::before {
-        margin: 0 20px;
-        width: 2px;
+        margin: 0 0.4vw;
+        width: 0.08vw;
         height: 60%;
         content: '';
         background: #04f4fb;

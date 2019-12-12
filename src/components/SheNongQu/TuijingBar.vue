@@ -8,8 +8,8 @@
 </template>
 
 <script>
-    import ChartTitle from "./ChartTitle";
-    import ChartMixins from "./ChartMixins";
+    import ChartTitle from "../ChartTitle";
+    import ChartMixins from "../ChartMixins";
     import 'echarts/lib/component/axis'
     import 'echarts/lib/chart/bar'
     import 'echarts/lib/component/legend'
@@ -27,13 +27,19 @@
         data: () => ({
             options: {
                 grid: {
-                    left: '5%'
+                    top: '15%',
+                    left: '5%',
+                    right: '2%',
+                    bottom: '5%'
                 },
                 legend: {
+                    padding: [20,10,0,10],
+                    itemWidth: 10,
+                    itemGap: 120,
+                    itemHeight: 10,
                     textStyle: {
                         color: '#ffffff',
-                        fontSize: '20px',
-                        padding: 10
+                        fontSize: '9%'
                     },
                     data: ['已完成', '按计划推进', '滞后']
                 },
@@ -49,7 +55,7 @@
                         show: true,
                         textStyle: {
                             color: '#fff',
-                            fontSize: 20
+                            fontSize: '9%'
                         }
                     },
                     data: []
@@ -75,7 +81,7 @@
                             show: true,
                             textStyle: {
                                 color: '#000',
-                                fontSize: 20
+                                fontSize: '8%'
 
                             },
 
@@ -85,7 +91,7 @@
                         color: '#04f4fb',
                         barBorderRadius: [20, 0, 0, 20]
                     },
-                    barWidth: 20,
+                    barWidth: '60%',
                     name: '按计划推进',
                     data: []
                 }, {
@@ -96,11 +102,10 @@
                             show: true,
                             textStyle: {
                                 color: '#000',
-                                fontSize: 20
+                                fontSize: '8%'
                             },
                         }
                     },
-                    barWidth: 20,
 
                     itemStyle: {
                         color: '#3af16e'
@@ -111,13 +116,12 @@
                     type: 'bar',
                     stack: '总量',
                     name: '滞后',
-                    barWidth: 20,
                     label: {
                         normal: {
                             show: true,
                             textStyle: {
                                 color: '#000',
-                                fontSize: 20
+                                fontSize: '8%'
 
                             },
 

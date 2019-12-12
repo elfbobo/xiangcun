@@ -66,8 +66,10 @@
             chart: undefined,
             options: {
                 grid: {
-                    left: '2%',
-                    right: '2%'
+                    left: '2.5%',
+                    right: '2%',
+                    bottom: '10%',
+                    top: '10%'
                 },
                 visualMap: {
                     show: false,
@@ -91,7 +93,7 @@
                         show: true,
                         textStyle: {
                             color: '#fff',
-                            fontSize: 20
+                            fontSize: '70%'
                         }
                     },
                     splitNumber: 20,
@@ -109,7 +111,7 @@
                         show: true,
                         textStyle: {
                             color: '#fff',
-                            fontSize: 20
+                            fontSize: '70%'
                         },
                         formatter: '{value} %'
                     }
@@ -121,12 +123,12 @@
                         type: 'line'
                     },
                     textStyle: {
-                        fontSize: 20,
+                        fontSize: '80%',
                     },
                     renderMode: 'html',
                     formatter: function (params) {
                         const param = params[0]
-                        return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:15px;height:15px;background-color:${param.color};"></span>`
+                        return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:0.5vw;height:0.5vw;background-color:${param.color};"></span>`
                             + param.axisValue + '<br />' + param.name + '<br />' + param.value + '%'
                     }
                 },
@@ -190,7 +192,7 @@
 
         display: flex;
         flex-direction: column;
-        font-size: 30px;
+        font-size: 0.6vw;
         flex: 0 1 auto;
         min-height: 50%;
     }
@@ -201,6 +203,7 @@
     }
 
     .tuijing--header {
+        position: relative;
         display: flex;
         flex-wrap: wrap;
         flex-shrink: 1;
@@ -209,7 +212,8 @@
     }
 
     .tuijing--header span + span {
-        margin: 0 10px;
+        margin: 0 0.3vw;
+        line-height: 1;
     }
 
     .tuijing-chart {
@@ -219,7 +223,8 @@
     }
 
     .tuijing--select--span {
-        width: 10px;
+        width: 0.2vw;
+
         background: #04f4fb;
     }
 

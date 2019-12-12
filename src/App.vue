@@ -1,27 +1,45 @@
 <template>
     <div id="app">
-        <!--    <header>-->
-        <!--      <span class="header&#45;&#45;title">{{ title }}</span>-->
-        <!--    </header>-->
-        <tuijing-container v-if="true"></tuijing-container>
-        <she-nong-qu v-if="false"></she-nong-qu>
-<!--        <router-view />-->
+        <div class="wrap">
+            <div class="header">
+                <div class="logo">
+                    <router-link to="/"><img src="@/assets/images/logo-1.png" alt=""></router-link>
+                </div>
+                <div class="time">{{ nowTime }}</div>
+            </div>
+            <div class="main">
+                <menu-content></menu-content>
+                <router-view/>
+            </div>
+        </div>
     </div>
 </template>
-
-<style lang="less">
-    @import "assets/stylesheets/main.less";
-
-</style>
 <script>
-    // import Layout from "./components/Layout";
-    import TuijingContainer from "./components/TuijingContainer";
-    import SheNongQu from "./components/SheNongQu";
-
+    import MenuContent from "./components/menu/Menu";
     export default {
-        components: {TuijingContainer, SheNongQu},
+        components: {MenuContent},
         data: () => ({
-            title: '上海乡村振兴目标管理'
-        })
+            nowTime: '',
+            timerId: undefined
+        }),
+        created() {
+            this.getDate()
+            this.timerId = setInterval(() => {
+                this.getDate()
+            }, 1000)
+        },
+        methods: {
+            getDate () {
+                let dateNow = new Date()
+                this.nowTime = this.forMatterNum(dateNow.getFullYear()) + '/' + this.forMatterNum(dateNow.getMonth() + 1) + '/' + this.forMatterNum(dateNow.getDate()) + ' ' + this.forMatterNum(dateNow.getHours()) + ':' + this.forMatterNum(dateNow.getMinutes()) + ':' + this.forMatterNum(dateNow.getSeconds())
+            },
+            forMatterNum (num) {
+                return num <= 9 ? '0' + num : num
+            }
+
+        },
+        destroyed() {
+            clearInterval(this.timerId)
+        }
     }
 </script>
