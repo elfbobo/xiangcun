@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "mock": "nodemon mock.js"
   },
   "dependencies": {
     "core-js": "^3.4.3",
@@ -25,8 +26,12 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "koa": "^2.11.0",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
+    "nodemon": "^2.0.2",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "vue-axios": "^2.1.5",

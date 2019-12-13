@@ -6,6 +6,10 @@
         <span class="special-subtitle">
             {{ subtitle }}
         </span>
+        <div class="special-actions">
+            <slot name="actions">
+            </slot>
+        </div>
     </div>
 </template>
 
@@ -32,7 +36,9 @@
     .special-title--container, .special-title--container * {
         box-sizing: border-box;
     }
-
+    .special-actions {
+        margin-left: auto;
+    }
     .special-title {
         color: white;
         font-size: 0.7vw;

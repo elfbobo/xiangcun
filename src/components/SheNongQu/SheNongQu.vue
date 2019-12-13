@@ -2,11 +2,18 @@
     <div class="shenongqu--container">
         <div class="shenongqu--left">
             <div class="shenongqu--huan">
-                <huan title="2019年1月至11月77项重点任务推进情况"></huan>
                 <huan
-                        :finished="0"
-                        :processing="57"
-                        :delayed="2"
+                        ref="huan1"
+                        :finished="huan.first.finished"
+                        :processing="huan.first.processing"
+                        :delayed="huan.first.delayed"
+                        title="2019年1月至11月77项重点任务推进情况"
+                ></huan>
+                <huan
+                        ref="huan2"
+                        :finished="huan.second.finished"
+                        :processing="huan.second.processing"
+                        :delayed="huan.second.delayed"
                         title="11月77项重点任务推进情况"
                 ></huan>
             </div>
@@ -23,28 +30,8 @@
 </template>
 
 <script>
-    const dataArray = [
-        {name: '奉贤', finished: 16, processing: 46, delayed: 0},
-        {name: '浦东', finished: 16, processing: 42, delayed: 0},
-        {name: '宝山', finished: 16, processing: 35, delayed: 0},
-        {name: '崇明', finished: 17, processing: 42, delayed: 0},
-        {name: '青浦', finished: 16, processing: 43, delayed: 1},
-        {name: '嘉定', finished: 17, processing: 41, delayed: 1},
-        {name: '松江', finished: 17, processing: 41, delayed: 1},
-        {name: '闵行', finished: 16, processing: 39, delayed: 1},
-        {name: '金山', finished: 16, processing: 44, delayed: 3}
-    ]
-
     const mianjiArray = [
-        {name: '奉贤', value: 99.99},
-        {name: '浦东', value: 99.99},
-        {name: '宝山', value: 99.99},
-        {name: '崇明', value: 59.99},
-        {name: '青浦', value: 69.99},
-        {name: '嘉定', value: 99.99},
-        {name: '松江', value: 79.99},
-        {name: '闵行', value: 99.99},
-        {name: '金山', value: 99.99}
+
 
     ]
 
@@ -55,12 +42,58 @@
     export default {
         name: "SheNongQu",
         components: {TuijingBar, MianJi, Huan},
-        mounted() {
-            this.$refs.bar1.setOptionData(dataArray)
-            this.$refs.bar2.setOptionData(dataArray)
-            this.$refs.mianji1.setOptionData(mianjiArray)
-            this.$refs.mianji2.setOptionData(mianjiArray, 60.99)
+        data: () => ({
+            huan: {
+                first: {finished: 0, processing: 0, delayed: 0},
+                second: {finished: 0, processing: 0, delayed: 0}
+            }
+        }),
+        created() {
 
+        },
+        mounted() {
+            this.getData([this.sendRequest('/snq/pie'), this.sendRequest('/snq/pie')], this.resolveData, 'huan')
+            this.getData([this.sendRequest('/snq/bar'), this.sendRequest('/snq/bar')], this.resolveData, 'bar')
+            this.getData([this.sendRequest('/snq/line'), this.sendRequest('/snq/line')], this.resolveData, 'line')
+
+            // this.$refs.mianji1.setOptionData(mianjiArray)
+            // this.$refs.mianji2.setOptionData(mianjiArray, 60.99)
+
+        },
+        methods: {
+            resolveData(data = {}, i = 0, type = 'huan') {
+                const res = Array.isArray(data) ? [...data] : {...data}
+                if (type === 'bar') {
+                    this.$refs[i === 0 ? 'bar1' : 'bar2'].setOptionData(res)
+                } else if (type === 'line'){
+                    this.$refs[i === 0 ? 'mianji1' : 'mianji2'].setOptionData(res.value, res.showTarget ? res.target : null)
+                } else {
+                    this.huan[i === 0 ? 'first' : 'second'] = res
+                    this.$refs[i === 0 ? 'huan1' : 'huan2'].setChart(res)
+                }
+            },
+            getData(httpCallbacks = [], callback = () => {
+            }, type = '') {
+                Promise.all(httpCallbacks)
+                    .then(response => {
+                        for (let i = 0; i < response.length; i++) {
+                            const {status, data} = response[i]
+                            if (status && status === 200) {
+                                callback(data, i, type)
+                            }
+
+                        }
+                    }).catch(err => {
+                    console.log(err)
+                })
+            },
+            sendRequest(url = '/snq', params = {}) {
+                return this.$http({
+                    method: 'get',
+                    url: url,
+                    params: params
+                })
+            }
         }
     }
 </script>
@@ -77,11 +110,13 @@
         flex-direction: column;
         flex-grow: 1;
     }
+
     .shenongqu--right {
         display: flex;
         width: 42%;
         flex-direction: column;
     }
+
     .shenongqu--huan {
         height: 50%;
         flex-grow: 1;

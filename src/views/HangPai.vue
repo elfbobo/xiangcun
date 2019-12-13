@@ -2,6 +2,7 @@
     <div class="hangpai--container">
         <div class="xuanxiangka">
             <div class="svg--container" @click="showModal">
+                <span>乡村振兴航拍</span>
                 <svg t="1576052696483" class="icon" viewBox="0 0 1024 1024" version="1.1"
                      xmlns="http://www.w3.org/2000/svg" p-id="1873" width="200" height="200">
                     <path d="M916.48 124.16l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 143.64672 940.51328 124.16 916.48 124.16z"
@@ -36,7 +37,7 @@
             </div>
 
         </div>
-        <div style="position: absolute;width: 6%;height: 8%;z-index: 9999;background: rgba(3, 19, 44, 1);"></div>
+        <!--        <div style="position: absolute;width: 6%;height: 8%;z-index: 9999;background: rgba(3, 19, 44, 1);"></div>-->
         <iframe class="hangpai--iframe"
                 :src="currentURL"></iframe>
     </div>
@@ -134,7 +135,9 @@
         color: white;
         box-sizing: border-box;
     }
+
     .hangpai--container {
+
         top: 0;
         left: 0;
         right: 0;
@@ -147,6 +150,8 @@
 
     .hangpai--iframe {
         position: relative;
+        margin: 0;
+        padding: 0;
         z-index: 1;
         width: 100%;
         height: 100%;
@@ -155,8 +160,8 @@
     .xuanxiangka {
         position: absolute;
         z-index: 10000;
-        top: 1.5%;
-        left: 2.3%;
+        top: 0;
+        left: 0;
         display: flex;
         flex-direction: column;
     }
@@ -164,13 +169,18 @@
     .svg--container {
         flex-shrink: 1;
         flex-grow: 0;
-        width: 50px;
-        height: 50px;
+        width: 10vw;
+        height: 8vh;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
-        border-radius: 50%;
-        background: rgba(3, 19, 44, 0.8);
+        box-shadow: 2px 2px 10px black;
+        border-bottom-right-radius: 0.8vw;
+        background: #1b2a49;
+    }
+
+    .svg--container span {
+        font-size: 0.8vw;
     }
 
     .svg--container :hover {
@@ -178,23 +188,25 @@
     }
 
     .svg--container svg {
-        width: 90%;
+        width: 1vw;
     }
 
 
     .xuanxiangka--card {
         position: relative;
-        margin-top: 2vh;
-        width: 60vh;
-        height: 60vh;
-        padding: 20px;
+        margin-top: 1vw;
+        margin-left: 1vw;
+        width: 15vw;
+        height: 15vw;
+        padding: 0.4vw;
         padding-bottom: 0;
-        background: rgba(3, 19, 44, 0.4);
+        background: rgba(3, 19, 44, 0.6);
+        border-radius: 0.3vw;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         transition: transform 0.4s ease;
-        transform-origin: top left;
+        transform-origin: top;
         transform: scale(0, 0);
     }
 
@@ -218,7 +230,7 @@
         right: 10px;
         bottom: 10px;
         height: 25%;
-        font-size: 25px;
+        font-size: 0.5vw;
         display: flex;
         justify-content: center;
         align-items: center;

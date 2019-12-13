@@ -1,6 +1,19 @@
 <template>
     <div class="table--content--container">
-        <chart-title>{{ title }}</chart-title>
+        <chart-title>
+            <template>
+                {{ title }}
+            </template>
+            <template slot="actions">
+                <div class="icon-actions--container">
+                    <div class="icon-actions" v-for="(icon,ic) in icons" :key="'icons'+ic">
+                        <img :src="icon.img"/>
+                        {{ icon.name }}
+                    </div>
+                </div>
+            </template>
+
+        </chart-title>
         <table v-if="currentArray.length > 0">
             <tr>
                 <td>任务名称</td>
@@ -16,7 +29,7 @@
                 <td></td>
             </tr>
         </table>
-        <div v-if="dataArray" class="table-page--container">
+        <div v-if="arr" class="table-page--container">
             <div
                     class="table-page--content"
                     :class="{'table-page--active': currentPage === p}"
@@ -50,12 +63,30 @@
                 default: () => ([])
             },
             strict: Boolean,
-            dataArray: {
+            arr: {
                 type: [Boolean, Array],
                 default: false
             }
         },
+        watch: {
+            arr: {
+                handler(old, newVal) {
+                    if (old === newVal) return
+                    if (!old) return
+
+                    if (this.strict) {
+                        this.processedArray = this.processArray(old)
+                    } else {
+                        this.processedArray = old
+                    }
+
+
+                    this.currentArray = this.processedArray.slice(0, 20)
+                },
+            }
+        },
         data: () => ({
+            icons: [{img: quan, name: '按计划推进'}, {img: gou, name: '已完成'}, {img: sanjiao, name: '滞后'}],
             currentArray: [],
             processedArray: [],
             currentPage: 1
@@ -66,15 +97,7 @@
             }
         },
         mounted() {
-            this.$nextTick(() => {
-                if (!this.dataArray) return
-                if (this.strict) {
-                    this.processedArray = this.processArray(this.dataArray)
-                } else {
-                    this.processedArray = this.dataArray
-                }
-                this.currentArray = this.processedArray.slice(0, 20)
-            })
+
         },
         methods: {
             transferIcon(num = 0) {
@@ -108,77 +131,97 @@
     }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+    @import "../../assets/stylesheets/variables.less";
+    .icon-actions {
+        font-size: .5vw;
+        line-height: .5vw;
+        padding: 0 0.3vw;
+
+        &--container {
+            display: flex;
+            justify-content: space-around;
+            margin-right: 2vw;
+
+        }
+
+        img {
+            width: .3vw;
+        }
+    }
+
     .table--content--container {
         display: flex;
         flex-grow: 1;
         height: 100%;
         position: relative;
         flex-direction: column;
-    }
 
-    .table--content--container table {
-        position: relative;
-        flex: 1 0 auto;
-        margin: 0.8vw;
-        margin-bottom: 0;
-        font-size: 0.4vw;
-        border: 1px solid rgba(4, 244, 251, 0.4);
-        -webkit-border-horizontal-spacing: 0;
-        -webkit-border-vertical-spacing: 0.18vw;
+        table {
+            position: relative;
+            flex: 1 0 auto;
+            margin: 0.8vw;
+            margin-bottom: 0;
+            font-size: 0.4vw;
+            border: 1px solid rgba(4, 244, 251, 0.4);
+            -webkit-border-horizontal-spacing: 0;
+            -webkit-border-vertical-spacing: 0.18vw;
 
-    }
+            tr {
+                text-align: center;
 
-    .table--content--container table tr td:first-child {
-        width: 8vw;
-    }
+                &:nth-child(odd) {
+                    background: transparent;
+                }
 
-    .table--content--container table tr td {
-        height: 0.8vw;
-    }
+                &:nth-child(even) {
+                    background: rgba(4, 244, 251, 0.2);
+                }
 
-    .table--content--container table tr {
-        text-align: center;
-    }
+                &:first-child {
+                    td:first-child {
+                        text-align: center;
 
-    .table--content--container table tr td:first-child {
-        text-align: start;
-    }
+                        &::before {
+                            text-align: center;
+                            content: '';
+                            margin: 0;
 
-    .table--content--container table tr td:first-child span {
-        background: rgba(4, 244, 251, 0.4);
-        margin-right: 10%;
-        display: inline-block;
-        text-align: center;
-        vertical-align: middle;
-        width: 7%;
-        border-radius: 50%;
-    }
+                        }
+                    }
+                }
 
-    .table--content--container table tr td:first-child::before {
-        text-align: start;
-        content: '';
-        margin-left: 10%;
-        background: rgba(4, 244, 251, 0.2);
+                td {
+                    height: 0.8vw;
 
-    }
 
-    .table--content--container table tr:first-child td:first-child {
-        text-align: center;
-    }
+                    &:first-child {
+                        width: 8vw;
+                        text-align: start;
 
-    .table--content--container table tr:first-child td:first-child::before {
-        text-align: center;
-        content: '';
-        margin: 0;
-    }
+                        &::before {
+                            text-align: start;
+                            content: '';
+                            margin-left: 10%;
+                            background: rgba(4, 244, 251, 0.2);
+                        }
 
-    .table--content--container table tr:nth-child(odd) {
-        background: transparent;
-    }
+                        span {
+                            background: rgba(4, 244, 251, 0.4);
+                            margin-right: 10%;
+                            display: inline-block;
+                            text-align: center;
+                            vertical-align: middle;
+                            width: 7%;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
 
-    .table--content--container table tr:nth-child(even) {
-        background: rgba(4, 244, 251, 0.2);
+        }
+
+
     }
 
     .table-page--container {
@@ -203,15 +246,35 @@
         margin: 0 0.5vw;
         padding: 0.2vw 1vw;
         border: 0.5px solid rgba(4, 244, 251, 0.5);
-    }
 
-    .table-page--content:hover {
-        cursor: pointer;
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     .table-page--active {
-        border: 0.5px solid rgba(4, 244, 251, 1);
-        color: rgba(4, 244, 251, 1);
+        border: 0.5px solid @light-blue;
+        color: @light-blue;
         background: rgba(4, 244, 251, 0.2);
+    }
+
+    @media screen and (max-width: 1920px) {
+        .table--content--container table {
+            margin-top: 0;
+
+            tr {
+                height: 10px;
+
+                td {
+                    transform: scale(0.5, 0.5);
+
+                    &:first-child::before {
+                        margin-left: 0;
+                        text-align: start;
+                    }
+                }
+            }
+
+        }
     }
 </style>

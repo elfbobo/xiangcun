@@ -58,9 +58,8 @@
                         return
                     }
                     this.setOptionsData(newVal)
-                    this.setChart()
-                }
-            }
+                },
+            },
         },
         data: () => ({
             chart: undefined,
@@ -147,15 +146,11 @@
                 }]
             }
         }),
-        mounted() {
-            this.$emit('onChangeDistrict', this.selectedDistrict)
-
+        created() {
             this.options.visualMap.inRange.color = [this.startColor, this.endColor]
-
+        },
+        mounted() {
             this.setOptionsData(this.selectedDistrict)
-
-            this.setChart()
-
         },
         methods: {
             setChart() {
@@ -171,16 +166,22 @@
                 }
             },
             setOptionsData(val) {
-                console.log(val)
-                const temp = 77
-                const arr = []
-                const arrIndex = []
-                for (let i = 0; i < temp; i++) {
-                    arr.push(this.setValue('hehe', Math.round(Math.random() * 100)))
-                    arrIndex.push(i)
-                }
-                this.options.series[0].data = arr
-                this.options.xAxis.data = arrIndex
+                if (!val) return
+                this.$http.get(`/mingxi/${val}`).then(({status,data}) => {
+                    if (status === 200) {
+                        const arr = []
+                        const arrIndex= []
+                        for (let i = 0; i < data.length; i++) {
+                            arr.push(this.setValue(data[i].name,data[i].value))
+                            arrIndex.push(data[i].index)
+                        }
+                        this.options.series[0].data = arr
+                        this.options.xAxis.data = arrIndex
+                        this.setChart()
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
             },
 
         }

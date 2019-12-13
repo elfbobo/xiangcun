@@ -1,5 +1,5 @@
 *{margin:0;padding:0;}
-html,body{font-size: microsoft yahei;width:100%;height: 100%;}
+html,body{font-family: microsoft yahei;width:100%;height: 100%;}
 a{text-decoration: none;color:#04f4fb;}
 .wrap{background: url(../images/bg.png) no-repeat;background-size: cover;width:100%;height: 4.5rem;position: relative;display: flex;flex-direction: column}
 .header{background: url(../images/title-bg.png) no-repeat center top;height: .38rem;position: relative;background-size: 16rem .38rem;}

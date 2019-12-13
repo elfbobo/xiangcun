@@ -102,21 +102,26 @@
             }
         }),
         mounted() {
-            this.options.series[0].data = []
-            if (this.delayed) {
-                this.options.series[0].data.push(this.setPieDetail('滞后', this.delayed, '#fbb919'))
-            }
 
-            if (this.finished) {
-                this.options.series[0].data.push(this.setPieDetail('已完成', this.finished, '#3af16e'))
-            }
-            if (this.processing) {
-                this.options.series[0].data.push(this.setPieDetail('按计划推进', this.processing, '#04f4fb'))
-            }
+            this.$nextTick(() => {
 
-            this.$refs.pie.setChart()
+            })
         },
         methods: {
+            setChart({finished, processing, delayed}) {
+                this.options.series[0].data = []
+                if (delayed) {
+                    this.options.series[0].data.push(this.setPieDetail('滞后', delayed, '#fbb919'))
+                }
+
+                if (finished) {
+                    this.options.series[0].data.push(this.setPieDetail('已完成', finished, '#3af16e'))
+                }
+                if (processing) {
+                    this.options.series[0].data.push(this.setPieDetail('按计划推进', processing, '#04f4fb'))
+                }
+                this.$refs.pie.setChart()
+            },
             setPieDetail(name = '', value = 100, color = '#04f4fb') {
                 return {
                     name: name,
