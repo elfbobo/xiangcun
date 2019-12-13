@@ -30,11 +30,6 @@
 </template>
 
 <script>
-    const mianjiArray = [
-
-
-    ]
-
     import Huan from "./Huan";
     import MianJi from "./MianJi";
     import TuijingBar from "./TuijingBar";
@@ -55,17 +50,14 @@
             this.getData([this.sendRequest('/snq/pie'), this.sendRequest('/snq/pie')], this.resolveData, 'huan')
             this.getData([this.sendRequest('/snq/bar'), this.sendRequest('/snq/bar')], this.resolveData, 'bar')
             this.getData([this.sendRequest('/snq/line'), this.sendRequest('/snq/line')], this.resolveData, 'line')
-
-            // this.$refs.mianji1.setOptionData(mianjiArray)
-            // this.$refs.mianji2.setOptionData(mianjiArray, 60.99)
-
         },
         methods: {
             resolveData(data = {}, i = 0, type = 'huan') {
                 const res = Array.isArray(data) ? [...data] : {...data}
                 if (type === 'bar') {
                     this.$refs[i === 0 ? 'bar1' : 'bar2'].setOptionData(res)
-                } else if (type === 'line'){
+                } else if (type === 'line') {
+                    res.value = res.value.sort((a, b) => b.value - a.value)
                     this.$refs[i === 0 ? 'mianji1' : 'mianji2'].setOptionData(res.value, res.showTarget ? res.target : null)
                 } else {
                     this.huan[i === 0 ? 'first' : 'second'] = res
