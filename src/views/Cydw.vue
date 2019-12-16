@@ -4,12 +4,14 @@
             <mian-ji ref="line1" smooth :line-width="0" left="3%" :title="title1"></mian-ji>
         </div>
         <div class="router--col column">
-            <mian-ji ref="line2" smooth :line-width="0" left="3%" :title="title2" start-color="rgba(251,185,25,1)"></mian-ji>
+            <mian-ji ref="line2" smooth :line-width="0" left="3%" :title="title2"
+                     start-color="rgba(251,185,25,1)"></mian-ji>
         </div>
     </div>
 </template>
 <script>
     import MianJi from "../components/SheNongQu/MianJi";
+
     export default {
         components: {MianJi},
         data: () => ({
@@ -18,16 +20,16 @@
         }),
         mounted() {
 
-            this.sendRequest('line1')
-            this.sendRequest('line2')
+            this.sendRequest('overall', 'line1')
+            this.sendRequest('last', 'line2')
         },
         methods: {
-            sendRequest(refName = '',params = {}) {
+            sendRequest(month = '', refName = '', params = {}) {
                 this.$http({
                     method: 'get',
-                    url: '/cydw',
+                    url: `/cydw/${month}`,
                     params: params
-                }).then(({status,data}) => {
+                }).then(({status, data}) => {
                     if (status === 200) {
                         if (!this.$refs[refName]) return
                         this.$refs[refName].setOptionData(data)

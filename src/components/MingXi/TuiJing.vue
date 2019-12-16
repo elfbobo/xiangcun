@@ -35,6 +35,10 @@
                 type: String,
                 default: '浦东新区'
             },
+            month: {
+              type: [Boolean, String],
+              default: false
+            },
             startColor: {
                 type: String,
                 default: '#14c396',
@@ -57,7 +61,7 @@
                     if (old === newVal) {
                         return
                     }
-                    this.setOptionsData(newVal)
+                    this.setOptionsData(newVal, this.month)
                 },
             },
         },
@@ -150,7 +154,7 @@
             this.options.visualMap.inRange.color = [this.startColor, this.endColor]
         },
         mounted() {
-            this.setOptionsData(this.selectedDistrict)
+            this.setOptionsData(this.selectedDistrict, this.month)
         },
         methods: {
             setChart() {
@@ -165,9 +169,9 @@
                     value: percent
                 }
             },
-            setOptionsData(val) {
+            setOptionsData(val = '', month = false) {
                 if (!val) return
-                this.$http.get(`/mingxi/${val}`).then(({status,data}) => {
+                this.$http.get(`/snqmx/${val}${!month ? '/' : '/'+month}`).then(({status,data}) => {
                     if (status === 200) {
                         const arr = []
                         const arrIndex= []

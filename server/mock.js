@@ -14,8 +14,12 @@ const tasks = ['全市郊野单元规划', '示范村郊野单元规划', '开�
     '启动1万集中居住', '加强风貌引导', '加强支持政策落地', '修订住房建设管理方法'
 ]
 
-
-router.get('/mingxi/:district', (ctx, next) => {
+/**
+ * @api {get} /snqmx/:district/:month
+ * @apiName 涉农区明细
+ * @apiSuccess {Array} value 涉农区明细条形图
+ */
+router.get('/snqmx/:district/:month', (ctx, next) => {
     const dataArray = []
     for (let i = 0; i < 77; i++) {
         const probability = Math.random() < 0.75
@@ -28,7 +32,7 @@ router.get('/mingxi/:district', (ctx, next) => {
     ctx.body = dataArray
 })
 
-router.get('/cydw', (ctx, next) => {
+router.get('/cydw/:month', (ctx, next) => {
     ctx.body = [
         {name: '市发展改革委', value: (Math.random() * 100).toFixed(2)},
         {name: '市规划资源局', value: (Math.random() * 100).toFixed(2)},
@@ -37,7 +41,7 @@ router.get('/cydw', (ctx, next) => {
         {name: '市绿化市容局', value: (Math.random() * 100).toFixed(2)},
         {name: '市民政局', value: (Math.random() * 100).toFixed(2)},
         {name: '市农业农村委', value: (Math.random() * 100).toFixed(2)},
-        {name: '市人力资源社会保障局', value: (Math.random() * 100).toFixed(2)},
+        {name: '市人力资源社会保障局顶顶顶顶顶顶顶顶顶顶', value: (Math.random() * 100).toFixed(2)},
         {name: '市水务局', value: (Math.random() * 100).toFixed(2)},
         {name: '市司法局', value: (Math.random() * 100).toFixed(2)},
         {name: '市委宣传部', value: (Math.random() * 100).toFixed(2)},
@@ -48,7 +52,7 @@ router.get('/cydw', (ctx, next) => {
         {name: '市委组织部', value: (Math.random() * 100).toFixed(2)}
     ]
 })
-router.get('/zdrw', (ctx, next) => {
+router.get('/zdrw/:month', (ctx, next) => {
     let dataArray = []
     for (let i = 0; i < 77; i++) {
         const temp = []
@@ -77,33 +81,83 @@ router.get('/zdrw', (ctx, next) => {
  * 环状图的api
  *
  */
-router.get('/snq/pie', (ctx, next) => {
+router.get('/snq/pie/:month', (ctx, next) => {
+    const {month} = ctx.params
     ctx.body = {
-        finished: Math.floor(Math.random() * 100),
+        finished: month !== 'last' ? Math.floor(Math.random() * 100) : 0,
         processing: Math.floor(Math.random() * 100),
         delayed: Math.floor(Math.random() * 100)
     }
 })
 
-router.get('/snq/bar', (ctx,next) => {
+router.get('/snq/bar/:month', (ctx, next) => {
     ctx.body = [
-        {name: '奉贤', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '浦东', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '宝山', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '崇明', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '青浦', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '嘉定', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '松江', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '闵行', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)},
-        {name: '金山', finished: Math.floor(Math.random() * 100), processing: Math.floor(Math.random() * 100), delayed: Math.floor(Math.random() * 100)}
+        {
+            name: '奉贤',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '浦东',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '宝山',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '崇明',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '青浦',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '嘉定',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '松江',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '闵行',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        },
+        {
+            name: '金山',
+            finished: Math.floor(Math.random() * 100),
+            processing: Math.floor(Math.random() * 100),
+            delayed: Math.floor(Math.random() * 100)
+        }
     ]
 })
 
-router.get('/snq/line', (ctx,next) => {
+router.get('/snq/line/:month', (ctx, next) => {
+    const { month } = ctx.params
+    let target
+    if (month === 'last') {
+        target = Math.floor(Math.random() * 100)
+    }
     ctx.body = {
-        showTarget: true,
-        target: Math.floor(Math.random() * 100),
-        value : [
+        target: target,
+        value: [
             {name: '奉贤', value: Math.floor(Math.random() * 100)},
             {name: '浦东', value: Math.floor(Math.random() * 100)},
             {name: '宝山', value: Math.floor(Math.random() * 100)},

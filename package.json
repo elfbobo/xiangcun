@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "mock": "nodemon server/mock.js"
+    "mock": "nodemon server/mock.js",
+    "doc": "apidoc -i server/"
   },
   "dependencies": {
     "core-js": "^3.4.3",

@@ -13,12 +13,14 @@
             <tui-jing
                     title="2019年1月至11月77项相关委办局重点任务推进情况"
                     :selected-district="selectedDistrict"
+                    month="overall"
             ></tui-jing>
             <tui-jing
                     title="11月77项相关委办局重点任务推进情况"
                     :selected-district="selectedDistrict"
                     start-color="#1f72a3"
                     end-color="#bb9528"
+                    month="last"
             ></tui-jing>
         </div>
 

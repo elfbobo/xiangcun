@@ -47,9 +47,9 @@
 
         },
         mounted() {
-            this.getData([this.sendRequest('/snq/pie'), this.sendRequest('/snq/pie')], this.resolveData, 'huan')
-            this.getData([this.sendRequest('/snq/bar'), this.sendRequest('/snq/bar')], this.resolveData, 'bar')
-            this.getData([this.sendRequest('/snq/line'), this.sendRequest('/snq/line')], this.resolveData, 'line')
+            this.getData([this.sendRequest('/snq/pie/overall'), this.sendRequest('/snq/pie/last')], this.resolveData, 'huan')
+            this.getData([this.sendRequest('/snq/bar/overall'), this.sendRequest('/snq/bar/last')], this.resolveData, 'bar')
+            this.getData([this.sendRequest('/snq/line/overall'), this.sendRequest('/snq/line/last')], this.resolveData, 'line')
         },
         methods: {
             resolveData(data = {}, i = 0, type = 'huan') {
@@ -58,7 +58,7 @@
                     this.$refs[i === 0 ? 'bar1' : 'bar2'].setOptionData(res)
                 } else if (type === 'line') {
                     res.value = res.value.sort((a, b) => b.value - a.value)
-                    this.$refs[i === 0 ? 'mianji1' : 'mianji2'].setOptionData(res.value, res.showTarget ? res.target : null)
+                    this.$refs[i === 0 ? 'mianji1' : 'mianji2'].setOptionData(res.value, res.target ? res.target : null)
                 } else {
                     this.huan[i === 0 ? 'first' : 'second'] = res
                     this.$refs[i === 0 ? 'huan1' : 'huan2'].setChart(res)
@@ -76,7 +76,7 @@
 
                         }
                     }).catch(err => {
-                    console.log(err)
+                    console.error(err)
                 })
             },
             sendRequest(url = '/snq', params = {}) {

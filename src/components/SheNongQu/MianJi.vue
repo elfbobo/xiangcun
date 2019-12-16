@@ -41,8 +41,8 @@
             },
             smooth: Boolean,
             lineWidth: {
-              type: Number,
-              default: 2
+                type: Number,
+                default: 2
             },
             startOffset: {
                 type: Number,
@@ -63,7 +63,6 @@
                     left: '10%',
                     right: '2%',
                     top: '10%',
-                    bottom: '10%'
                 },
                 xAxis: {
                     type: 'category',
@@ -80,6 +79,15 @@
                         textStyle: {
                             color: '#fff',
                             fontSize: '7%'
+                        },
+                        formatter: function (params) {
+                            let res = ''
+                            const maxW = 10
+                            const rowNumber = Math.ceil(params.length / maxW)
+                            for (let i = 0; i < rowNumber; i++) {
+                                res += params.slice(i * maxW, i * maxW + maxW) + '\n'
+                            }
+                            return res
                         }
                     },
                     data: ['宝山', '浦东', '嘉定', '崇明', '奉贤', '松江', '青浦', '闵行', '金山']

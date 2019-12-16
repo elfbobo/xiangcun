@@ -23,7 +23,7 @@
             dataArr2: []
         }),
         created() {
-            Promise.all([this.sendRequest(), this.sendRequest()]).then((arr) => {
+            Promise.all([this.sendRequest('overall'), this.sendRequest('last')]).then((arr) => {
                 this.dataArr1 = arr[0]
                 this.dataArr2 = arr[1]
             }).catch(err => {
@@ -33,11 +33,11 @@
 
         },
         methods: {
-            sendRequest(params = {}) {
+            sendRequest(month = '',params = {}) {
                 return new Promise((resolve, reject) => {
                     this.$http({
                         method: 'get',
-                        url: '/zdrw',
+                        url: `/zdrw/${month}`,
                         params: params
                     }).then(({status, data}) => {
                         if (status === 200) {
