@@ -6,6 +6,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Zdrw.vue')
+  },
+  {
+    path: '/zdrw',
     name: 'zdrw',
     component: () => import(/* webpackChunkName: "about" */ '@/views/Zdrw.vue')
   },

@@ -33,9 +33,12 @@
     "koa2-cors": "^2.0.6",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
+    "lodash": "^4.17.15",
     "nodemon": "^2.0.2",
+    "qs": "^6.9.1",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
+    "swiper": "^5.2.1",
     "vue-axios": "^2.1.5",
     "vue-template-compiler": "^2.6.10"
   }

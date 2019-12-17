@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import TableContent from "./TableContent";
 
     export default {
@@ -35,7 +36,10 @@
         methods: {
             sendRequest(month = '',params = {}) {
                 return new Promise((resolve, reject) => {
-                    this.$http({
+                    const instance = axios.create({
+                        baseURL: 'http://localhost:8081/api'
+                    })
+                    instance({
                         method: 'get',
                         url: `/zdrw/${month}`,
                         params: params

@@ -15,6 +15,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import echarts from 'echarts/lib/echarts'
     import 'echarts/lib/chart/bar'
     import 'echarts/lib/component/axis'
@@ -171,7 +172,10 @@
             },
             setOptionsData(val = '', month = false) {
                 if (!val) return
-                this.$http.get(`/snqmx/${val}${!month ? '/' : '/'+month}`).then(({status,data}) => {
+                const instance = axios.create({
+                    baseURL: 'http://localhost:8081/api'
+                })
+                instance.get(`/snqmx/${val}${!month ? '/' : '/'+month}`).then(({status,data}) => {
                     if (status === 200) {
                         const arr = []
                         const arrIndex= []

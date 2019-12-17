@@ -30,6 +30,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import Huan from "./Huan";
     import MianJi from "./MianJi";
     import TuijingBar from "./TuijingBar";
@@ -39,8 +40,8 @@
         components: {TuijingBar, MianJi, Huan},
         data: () => ({
             huan: {
-                first: {finished: 0, processing: 0, delayed: 0},
-                second: {finished: 0, processing: 0, delayed: 0}
+                first: {finished: 27, processing: 61, delayed: 12},
+                second: {finished: 0, processing: 61, delayed: 39}
             }
         }),
         created() {
@@ -80,7 +81,10 @@
                 })
             },
             sendRequest(url = '/snq', params = {}) {
-                return this.$http({
+                const instance = axios.create({
+                    baseURL: 'http://localhost:8081/api'
+                })
+                return instance({
                     method: 'get',
                     url: url,
                     params: params

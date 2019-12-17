@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+    import axios from 'axios'
     import MianJi from "../components/SheNongQu/MianJi";
 
     export default {
@@ -25,7 +26,10 @@
         },
         methods: {
             sendRequest(month = '', refName = '', params = {}) {
-                this.$http({
+                const instance = axios.create({
+                    baseURL: 'http://localhost:8081/api'
+                })
+                instance({
                     method: 'get',
                     url: `/cydw/${month}`,
                     params: params

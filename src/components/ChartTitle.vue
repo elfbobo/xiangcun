@@ -41,7 +41,7 @@
     }
     .special-title {
         color: white;
-        font-size: 0.7vw;
+        font-size: 0.1167rem;
         margin-left: 0.4vw;
 
     }
@@ -54,7 +54,7 @@
     }
     .special-subtitle {
         color: gray;
-        font-size: 0.5vw;
+        font-size: .1rem;
 
     }
 </style>
