@@ -28,28 +28,27 @@
 </template>
 
 <script>
-    import TuiJing from "./TuiJing";
+import TuiJing from './TuiJing'
 
-    export default {
-        name: "TuijingContainer",
-        components: {TuiJing},
-        data() {
-            const districts = ['浦东新区', '闵行区', '嘉定区', '宝山区', '奉贤区', '松江区', '金山区', '青浦区', '崇明区']
-            return {
-                selectedDistrict: districts[0],
-                districts
-            }
-        },
-        methods: {
-            selectDistrict(district) {
-                if (!district) {
-                    return
-                }
-                this.selectedDistrict = district
-
-            }
-        }
+export default {
+  name: 'TuijingContainer',
+  components: { TuiJing },
+  data () {
+    const districts = ['浦东新区', '闵行区', '嘉定区', '宝山区', '奉贤区', '松江区', '金山区', '青浦区', '崇明区']
+    return {
+      selectedDistrict: districts[0],
+      districts
     }
+  },
+  methods: {
+    selectDistrict (district) {
+      if (!district) {
+        return
+      }
+      this.selectedDistrict = district
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -86,7 +85,6 @@
     .tuijings--select:hover {
         cursor: pointer;
     }
-
 
     .tuijings--active {
         color: #04f4fb;

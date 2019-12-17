@@ -132,14 +132,14 @@ export default {
             textStyle: {
               color: '#ffffff',
               fontFamily: 'microsoft yahei',
-              fontSize: '68%',
+              fontSize: '68%'
             }
           },
           splitArea: {
-            show: false,
+            show: false
           },
           splitLine: {
-            show: false,
+            show: false
           },
           data: optionChart.xAxisData
         }],
@@ -149,11 +149,11 @@ export default {
           min: 0,
           offset: 8,
           splitNumber: optionChart.yAxisSplit,
-          boundaryGap: [0.2,0.2],
-          axisLine : {
+          boundaryGap: [0.2, 0.2],
+          axisLine: {
             show: false
           },
-          axisTick : {
+          axisTick: {
             show: true
           },
           axisLabel: {
@@ -161,30 +161,30 @@ export default {
             margin: 13,
             formatter: '{value}',
             textStyle: {
-                color: '#fff',
-                fontFamily: 'microsoft yahei',
-                fontSize: '68%'
+              color: '#fff',
+              fontFamily: 'microsoft yahei',
+              fontSize: '68%'
             }
           },
           splitArea: {
             show: false,
             areaStyle: {
-              color:['rgba(144,238,144,0)','rgba(135,200,250,0)']
+              color: ['rgba(144,238,144,0)', 'rgba(135,200,250,0)']
             }
           },
-          splitLine : {
-            show:false
+          splitLine: {
+            show: false
           }
         }],
         series: []
-        };
-      for(var i=0;i<optionChart.seriesData.length;i++){
-        option.series[i]={
+      }
+      for (var i = 0; i < optionChart.seriesData.length; i++) {
+        option.series[i] = {
           name: optionChart.legendData[i],
           type: 'bar',
           itemStyle: {
             normal: {
-              barBorderRadius:0,
+              barBorderRadius: 0,
               label: {
                 show: false,
                 position: 'top',
@@ -196,8 +196,8 @@ export default {
             }
           },
           barCategoryGap: '6%',
-          barMaxWidth:optionChart.barWidth,
-          data:optionChart.seriesData[i]
+          barMaxWidth: optionChart.barWidth,
+          data: optionChart.seriesData[i]
         }
       }
       this.probability.setOption(option)

@@ -14,78 +14,78 @@
 </template>
 
 <script>
-    export default{
-        props:{
-            isShow:{
-                type:Boolean,
-                default:false
-            },
-            isFull:{
-                type:Boolean,
-                default:true
-            },
-            startAnimate:{
-                type:Boolean,
-                default:false
-            },
-            autoClose:{
-                type:Boolean,
-                default:false
-            },
-            closeShow:{
-                type:Boolean,
-                default:true
-            },
-            title:{
-                type:String,
-                default:''
-            },
-            duration: {
-                type: Number,
-                default: 6000
-            }
-        },
-        data() {
-            return {
-                globalStyle:{}
-            }
-        },
-        watch:{
-            autoClose(newVal,oldVal){
-                if(newVal==true){
-                    setTimeout(()=>{
-                        this.$emit('close');
-                    },this.duration)
-                }else{
-                    return
-                }
-            },
-            isShow(newVal,oldVal){
-                if(newVal){
-                    return newVal
-                }
-            }
-        },
-        mounted(){
-            if(this.autoClose){
-                setTimeout(()=>{
-                     this.$emit('close');
-                },this.duration)
-            }
-        },
-        methods: {
-            // init(globalPos){
-            //     if(!this.isFull && globalPos){
-            //         this.globalStyle=globalPos
-            //     }
-            // },
-            closeDialog(){
-                if(this.closeShow){
-                    this.$emit('close');
-                }
-            }
-        },
+export default {
+  props: {
+    isShow: {
+      type: Boolean,
+      default: false
+    },
+    isFull: {
+      type: Boolean,
+      default: true
+    },
+    startAnimate: {
+      type: Boolean,
+      default: false
+    },
+    autoClose: {
+      type: Boolean,
+      default: false
+    },
+    closeShow: {
+      type: Boolean,
+      default: true
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    duration: {
+      type: Number,
+      default: 6000
     }
+  },
+  data () {
+    return {
+      globalStyle: {}
+    }
+  },
+  watch: {
+    autoClose (newVal, oldVal) {
+      if (newVal == true) {
+        setTimeout(() => {
+          this.$emit('close')
+        }, this.duration)
+      } else {
+
+      }
+    },
+    isShow (newVal, oldVal) {
+      if (newVal) {
+        return newVal
+      }
+    }
+  },
+  mounted () {
+    if (this.autoClose) {
+      setTimeout(() => {
+        this.$emit('close')
+      }, this.duration)
+    }
+  },
+  methods: {
+    // init(globalPos){
+    //     if(!this.isFull && globalPos){
+    //         this.globalStyle=globalPos
+    //     }
+    // },
+    closeDialog () {
+      if (this.closeShow) {
+        this.$emit('close')
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

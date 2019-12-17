@@ -59,29 +59,29 @@ export default {
     DialogBase,
     DialogMark,
     Barchart,
-    LineChart,
+    LineChart
   },
   methods: {
     init () {
-      this.isShowDialog = true;  
-      this.linePopChart();
-      this.barPopChart();
+      this.isShowDialog = true
+      this.linePopChart()
+      this.barPopChart()
     },
     cancelPop () {
-      this.isShowDialog = false;
+      this.isShowDialog = false
     },
-    linePopChart(){
+    linePopChart () {
       this.$set(this.popAttr, 'pageList', {
         colorList: ['#35f0fe', '#5395d2', '#cbeef0', '#ec7d31', '#ffc000', '#93d695', '#5a77e0', '#ec8764', '#8777d8'],
-        legend: {show:true},
+        legend: { show: true },
         unit: '亿元',
         xUnit: '年',
-        grid: {xPos: '8%',yPos: '13%',xPosR: '7%',yPosB: '10.5%'},
-        yAxis: {min: 0,max: 15},
-        series: {symbol: false, symbolMark: false}
+        grid: { xPos: '8%', yPos: '13%', xPosR: '7%', yPosB: '10.5%' },
+        yAxis: { min: 0, max: 15 },
+        series: { symbol: false, symbolMark: false }
       })
-      var dataList={
-        legend: ["浦东", "宝山", "闵行", "嘉定", "金山", "松江", "青浦", "奉贤", "崇明"],
+      var dataList = {
+        legend: ['浦东', '宝山', '闵行', '嘉定', '金山', '松江', '青浦', '奉贤', '崇明'],
         series: [
           [68.98, 65.1, 59.44, 53.07, 47.97],
           [5.77, 5.55, 4.88, 4.07, 3.15],
@@ -92,15 +92,15 @@ export default {
           [24.54, 23.75, 22.8, 21.09, 20.01],
           [45.93, 43.4, 41.59, 40.4, 32.82],
           [61.05, 62.37, 60.06, 58.86, 57.32]
-        ],                        
-        xaxis: ["2013", "2014", "2015", "2016", "2017"]
+        ],
+        xaxis: ['2013', '2014', '2015', '2016', '2017']
       }
-      this.$refs.lineChartPop.init(this.popAttr, dataList)    
+      this.$refs.lineChartPop.init(this.popAttr, dataList)
     },
-    barPopChart(){
+    barPopChart () {
       this.$set(this.popBarAttr, 'pageList', {
         colorList: ['#35f1ff', '#5396d3', '#cceff1', '#ed7d31', '#ffbe00'],
-        tooltip: {show: true},
+        tooltip: { show: true },
         unit: '亿元',
         xUnit: '',
         legend: {
@@ -108,7 +108,7 @@ export default {
           itemWidth: 8,
           itemHeight: 8,
           yPos: '3%',
-          xPos: "center"
+          xPos: 'center'
         },
         grid: {
           yOne: '13.5%',
@@ -116,21 +116,21 @@ export default {
           gridXOne: '8%',
           gridXTwo: '5%'
         },
-        yAxis: {min: 0,max: 150,splitNum: 4},
+        yAxis: { min: 0, max: 150, splitNum: 4 },
         series: {
           barMaxWidth: 10
         }
       })
-      var dataList={
-        legend: ["种植业", "林业", "牧业", "渔业", "农林牧渔服务业"],
+      var dataList = {
+        legend: ['种植业', '林业', '牧业', '渔业', '农林牧渔服务业'],
         series: [
           [31.78, 2.41, 2.47, 7.7, 17.78, 7.94, 13.13, 19.17, 27.16],
           [2.5, 0.13, 0.17, 0.24, 0.97, 2.84, 0.61, 1.4, 5.57],
           [2.24, 0.15, 0.03, 0.69, 6.27, 4.21, 1.08, 5.41, 9.56],
           [7.61, 0.14, 0.05, 0.7, 2.2, 0.89, 4.45, 5.64, 12.88],
           [3.84, 0.32, 0.14, 0.73, 1.01, 1.21, 0.74, 1.2, 2.15]
-        ],                
-        xaxis: ["浦东", "宝山", "闵行", "嘉定", "金山", "松江", "青浦", "奉贤", "崇明"]
+        ],
+        xaxis: ['浦东', '宝山', '闵行', '嘉定', '金山', '松江', '青浦', '奉贤', '崇明']
       }
       this.$refs.barChartPop.init(this.popBarAttr, dataList)
     }

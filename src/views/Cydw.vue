@@ -10,38 +10,37 @@
     </div>
 </template>
 <script>
-    import axios from 'axios'
-    import MianJi from "../components/SheNongQu/MianJi";
+import axios from 'axios'
+import MianJi from '../components/SheNongQu/MianJi'
 
-    export default {
-        components: {MianJi},
-        data: () => ({
-            title1: '2019年1月至11月77项相关委办局重点任务推进情况',
-            title2: '11月77项相关委办局重点任务推进情况'
-        }),
-        mounted() {
-
-            this.sendRequest('overall', 'line1')
-            this.sendRequest('last', 'line2')
-        },
-        methods: {
-            sendRequest(month = '', refName = '', params = {}) {
-                const instance = axios.create({
-                    baseURL: 'http://localhost:8081/api'
-                })
-                instance({
-                    method: 'get',
-                    url: `/cydw/${month}`,
-                    params: params
-                }).then(({status, data}) => {
-                    if (status === 200) {
-                        if (!this.$refs[refName]) return
-                        this.$refs[refName].setOptionData(data)
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-            }
+export default {
+  components: { MianJi },
+  data: () => ({
+    title1: '2019年1月至11月77项相关委办局重点任务推进情况',
+    title2: '11月77项相关委办局重点任务推进情况'
+  }),
+  mounted () {
+    this.sendRequest('overall', 'line1')
+    this.sendRequest('last', 'line2')
+  },
+  methods: {
+    sendRequest (month = '', refName = '', params = {}) {
+      const instance = axios.create({
+        baseURL: 'http://localhost:8081/api'
+      })
+      instance({
+        method: 'get',
+        url: `/cydw/${month}`,
+        params: params
+      }).then(({ status, data }) => {
+        if (status === 200) {
+          if (!this.$refs[refName]) return
+          this.$refs[refName].setOptionData(data)
         }
+      }).catch(err => {
+        console.log(err)
+      })
     }
+  }
+}
 </script>

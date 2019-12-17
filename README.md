@@ -10,4 +10,11 @@
 
 ![航拍](https://github.com/zzh97228/xiangcun/blob/master/examples/hangpai.png)
 
+![美丽家园](https://github.com/zzh97228/xiangcun/blob/master/examples/meilijiayuan.png)
+
+![幸福乐园](https://github.com/zzh97228/xiangcun/blob/master/examples/xingfuleyuan.png)
+
+![绿色田园](https://github.com/zzh97228/xiangcun/blob/master/examples/lvsetianyuan.png)
+
+
 

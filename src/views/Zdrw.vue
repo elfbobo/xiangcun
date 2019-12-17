@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import TableForm from "../components/ZhongDianRenWu/TableForm";
+import TableForm from '../components/ZhongDianRenWu/TableForm'
 export default {
-  components: {TableForm}
+  components: { TableForm }
 }
 </script>
 
@@ -16,4 +16,3 @@ export default {
   height: auto;
 }
 </style>
-

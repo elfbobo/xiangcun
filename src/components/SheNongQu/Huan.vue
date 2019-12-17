@@ -35,109 +35,108 @@
 
 <script>
 
-    import 'echarts/lib/chart/pie'
-    import 'echarts/lib/component/grid'
-    import 'echarts/lib/component/tooltip'
-    import ChartTitle from "../ChartTitle";
-    import ChartMixins from "../ChartMixins";
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/grid'
+import 'echarts/lib/component/tooltip'
+import ChartTitle from '../ChartTitle'
+import ChartMixins from '../ChartMixins'
 
-    export default {
-        name: "Huan",
-        components: {ChartMixins, ChartTitle},
-        props: {
-            title: {
-                type: String,
-                default: '推进情况'
-            },
-            finished: {
-                type: [Number, String],
-                default: 18
-            },
-            processing: {
-                type: [Number, String],
-                default: 56
-            },
-            delayed: {
-                type: [Number, String],
-                default: 3
-            }
-        },
-        computed: {
-            percentage() {
-                const sum = this.finished + this.processing + this.delayed
-                return {
-                    finished: (this.finished / sum * 100).toFixed(2),
-                    processing: (this.processing / sum * 100).toFixed(2),
-                    delayed: (this.delayed / sum * 100).toFixed(2),
-
-                }
-            }
-        },
-        data: () => ({
-            options: {
-                grid: {
-                    left: '2%',
-                    right: '2%',
-                    bottom: '2%',
-                    top: '2%',
-                },
-                tooltip: {
-                    show: true,
-                    textStyle: {
-                        fontSize: '8%'
-                    },
-                    renderMode: 'html'
-
-                },
-                series: [{
-                    type: 'pie',
-                    radius: ['50%', '70%'],
-                    label: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    data: []
-                }]
-            }
-        }),
-        mounted() {
-
-            this.$nextTick(() => {
-
-            })
-        },
-        methods: {
-            setChart({finished, processing, delayed}) {
-                this.options.series[0].data = []
-                if (delayed) {
-                    this.options.series[0].data.push(this.setPieDetail('滞后', delayed, '#fbb919'))
-                }
-
-                if (finished) {
-                    this.options.series[0].data.push(this.setPieDetail('已完成', finished, '#3af16e'))
-                }
-                if (processing) {
-                    this.options.series[0].data.push(this.setPieDetail('按计划推进', processing, '#04f4fb'))
-                }
-                this.$refs.pie.setChart()
-            },
-            setPieDetail(name = '', value = 100, color = '#04f4fb') {
-                return {
-                    name: name,
-                    value: value,
-                    itemStyle: {
-                        color: color
-                    },
-                    tooltip: {
-                        formatter: function (params) {
-                            return `${params.marker} ${params.name}: ${params.percent}%`
-                        }
-                    }
-                }
-            }
-        }
+export default {
+  name: 'Huan',
+  components: { ChartMixins, ChartTitle },
+  props: {
+    title: {
+      type: String,
+      default: '推进情况'
+    },
+    finished: {
+      type: [Number, String],
+      default: 18
+    },
+    processing: {
+      type: [Number, String],
+      default: 56
+    },
+    delayed: {
+      type: [Number, String],
+      default: 3
     }
+  },
+  computed: {
+    percentage () {
+      const sum = this.finished + this.processing + this.delayed
+      return {
+        finished: (this.finished / sum * 100).toFixed(2),
+        processing: (this.processing / sum * 100).toFixed(2),
+        delayed: (this.delayed / sum * 100).toFixed(2)
+
+      }
+    }
+  },
+  data: () => ({
+    options: {
+      grid: {
+        left: '2%',
+        right: '2%',
+        bottom: '2%',
+        top: '2%'
+      },
+      tooltip: {
+        show: true,
+        textStyle: {
+          fontSize: '8%'
+        },
+        renderMode: 'html'
+
+      },
+      series: [{
+        type: 'pie',
+        radius: ['50%', '70%'],
+        label: {
+          normal: {
+            show: false
+          }
+        },
+        data: []
+      }]
+    }
+  }),
+  mounted () {
+    this.$nextTick(() => {
+
+    })
+  },
+  methods: {
+    setChart ({ finished, processing, delayed }) {
+      this.options.series[0].data = []
+      if (delayed) {
+        this.options.series[0].data.push(this.setPieDetail('滞后', delayed, '#fbb919'))
+      }
+
+      if (finished) {
+        this.options.series[0].data.push(this.setPieDetail('已完成', finished, '#3af16e'))
+      }
+      if (processing) {
+        this.options.series[0].data.push(this.setPieDetail('按计划推进', processing, '#04f4fb'))
+      }
+      this.$refs.pie.setChart()
+    },
+    setPieDetail (name = '', value = 100, color = '#04f4fb') {
+      return {
+        name: name,
+        value: value,
+        itemStyle: {
+          color: color
+        },
+        tooltip: {
+          formatter: function (params) {
+            return `${params.marker} ${params.name}: ${params.percent}%`
+          }
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

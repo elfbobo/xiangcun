@@ -118,7 +118,7 @@
                                </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
@@ -131,191 +131,189 @@
 </template>
 
 <script>
-    import DialogBase from '@/components/dialog/zdialogbase'
-    import DialogMark from '@/components/dialog/dialoMark'
-    import Swiper from 'swiper';
-    export default {
-        data() {
-            return {
-                title: '',
-                src:'https://www.baidu.com',
-                isShowDialog:false,
-                autoCloseData:false,
-                lsgnData:[],
-                lsgnTotal:0,
-                scbhData:[],
-                scbhTotal:0,
-                tsysData:[],
-                tsysTotal:0,
-                yyData:[],
-                yyTotal:0,
-                mySwiper:null
-            }
-        },
-        components:{
-            DialogBase,
-            DialogMark
-        },
-        mounted(){
-            this.$nextTick(()=>{
-                this.mySwiper=new Swiper ('.swiper-container', {
-                  autoplay:false,
-                    // autoplay: {
-                    // delay: 6000,
-                    // stopOnLastSlide: false,
-                    // disableOnInteraction: false,
-                    // },
-                    speed:500,
-                    initialSlide :0,
-                freeMode: false,
-                observer:true,
-                observeParents:true,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                })  
-              
-            })
-        },
-        methods: {
-            init(val) {
-                this.isShowDialog=true;
-                this.mySwiper.activeIndex=val
-                // this.$refs.grainBase.init({left:'30%',right:'30%'})
-                this.getData();
-            },
-            cancelPop(){
-                this.isShowDialog=false;
-                
-            },
-            getSum(total,num){
-                return parseFloat(total)+parseFloat(num)
-            },
-            getData(){
-                this.lsgnData=[{
-                    label:'浦东',
-                    value:'8.06'
-                },{
-                    label:'宝山',
-                    value:'0.28'
-                },{
-                    label:'闵行',
-                    value:'0.83'
-                },{
-                    label:'嘉定',
-                    value:'4.01'
-                },{
-                    label:'金山',
-                    value:'12.50'
-                },{
-                    label:'松江',
-                    value:'10.25'
-                },{
-                    label:'青浦',
-                    value:'8.11'
-                },{
-                    label:'奉贤',
-                    value:'8.00'
-                },{
-                    label:'崇明',
-                    value:'28.35'
-                }]
-                // var lsgnArr=this.lsgnData.map(item=>item.value)
-                // this.lsgnTotal=lsgnArr.reduce((num1,num2)=>{
-                //     return parseFloat(num1)+parseFloat(num2)
-                // })
-
-                 this.lsgnTotal=80.37
-
-                this.scbhData=[{
-                    label:'浦东',
-                    value:'8.34'
-                },{
-                    label:'宝山',
-                    value:'0.73'
-                },{
-                    label:'闵行',
-                    value:'1.13'
-                },{
-                    label:'嘉定',
-                    value:'2.32'
-                },{
-                    label:'金山',
-                    value:'4.70'
-                },{
-                    label:'松江',
-                    value:'2.06'
-                },{
-                    label:'青浦',
-                    value:'6.81'
-                },{
-                    label:'奉贤',
-                    value:'8.50'
-                },{
-                    label:'崇明',
-                    value:'15.60'
-                }]
-
-               this.scbhTotal=50.18
-
-                this.tsysData=[{
-                    label:'浦东',
-                    value:'1.02'
-                },{
-                    label:'嘉定',
-                    value:'0.45'
-                },{
-                    label:'金山',
-                    value:'1.21'
-                },{
-                    label:'松江',
-                    value:'0.36'
-                },{
-                    label:'青浦',
-                    value:'0.82'
-                },{
-                    label:'奉贤',
-                    value:'0.97'
-                },{
-                    label:'崇明',
-                    value:'2.27'
-                }]
-
-                this.tsysTotal=7.1
-
-                this.yyData=[{
-                    label:'浦东',
-                    value:'1.48'
-                },{
-                    label:'宝山',
-                    value:'0.09'
-                },{
-                    label:'闵行',
-                    value:'0.1'
-                },{
-                    label:'嘉定',
-                    value:'0.2'
-                },{
-                    label:'金山',
-                    value:'1.31'
-                },{
-                    label:'松江',
-                    value:'0.88'
-                },{
-                    label:'青浦',
-                    value:'2.38'
-                },{
-                    label:'奉贤',
-                    value:'2.35'
-                },{
-                    label:'崇明',
-                    value:'7.77'
-                }]
-                this.yyTotal=16.56
-            }
-        },
+import DialogBase from '@/components/dialog/zdialogbase'
+import DialogMark from '@/components/dialog/dialoMark'
+import Swiper from 'swiper'
+export default {
+  data () {
+    return {
+      title: '',
+      src: 'https://www.baidu.com',
+      isShowDialog: false,
+      autoCloseData: false,
+      lsgnData: [],
+      lsgnTotal: 0,
+      scbhData: [],
+      scbhTotal: 0,
+      tsysData: [],
+      tsysTotal: 0,
+      yyData: [],
+      yyTotal: 0,
+      mySwiper: null
     }
+  },
+  components: {
+    DialogBase,
+    DialogMark
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.mySwiper = new Swiper('.swiper-container', {
+        autoplay: false,
+        // autoplay: {
+        // delay: 6000,
+        // stopOnLastSlide: false,
+        // disableOnInteraction: false,
+        // },
+        speed: 500,
+        initialSlide: 0,
+        freeMode: false,
+        observer: true,
+        observeParents: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      })
+    })
+  },
+  methods: {
+    init (val) {
+      this.isShowDialog = true
+      this.mySwiper.activeIndex = val
+      // this.$refs.grainBase.init({left:'30%',right:'30%'})
+      this.getData()
+    },
+    cancelPop () {
+      this.isShowDialog = false
+    },
+    getSum (total, num) {
+      return parseFloat(total) + parseFloat(num)
+    },
+    getData () {
+      this.lsgnData = [{
+        label: '浦东',
+        value: '8.06'
+      }, {
+        label: '宝山',
+        value: '0.28'
+      }, {
+        label: '闵行',
+        value: '0.83'
+      }, {
+        label: '嘉定',
+        value: '4.01'
+      }, {
+        label: '金山',
+        value: '12.50'
+      }, {
+        label: '松江',
+        value: '10.25'
+      }, {
+        label: '青浦',
+        value: '8.11'
+      }, {
+        label: '奉贤',
+        value: '8.00'
+      }, {
+        label: '崇明',
+        value: '28.35'
+      }]
+      // var lsgnArr=this.lsgnData.map(item=>item.value)
+      // this.lsgnTotal=lsgnArr.reduce((num1,num2)=>{
+      //     return parseFloat(num1)+parseFloat(num2)
+      // })
+
+      this.lsgnTotal = 80.37
+
+      this.scbhData = [{
+        label: '浦东',
+        value: '8.34'
+      }, {
+        label: '宝山',
+        value: '0.73'
+      }, {
+        label: '闵行',
+        value: '1.13'
+      }, {
+        label: '嘉定',
+        value: '2.32'
+      }, {
+        label: '金山',
+        value: '4.70'
+      }, {
+        label: '松江',
+        value: '2.06'
+      }, {
+        label: '青浦',
+        value: '6.81'
+      }, {
+        label: '奉贤',
+        value: '8.50'
+      }, {
+        label: '崇明',
+        value: '15.60'
+      }]
+
+      this.scbhTotal = 50.18
+
+      this.tsysData = [{
+        label: '浦东',
+        value: '1.02'
+      }, {
+        label: '嘉定',
+        value: '0.45'
+      }, {
+        label: '金山',
+        value: '1.21'
+      }, {
+        label: '松江',
+        value: '0.36'
+      }, {
+        label: '青浦',
+        value: '0.82'
+      }, {
+        label: '奉贤',
+        value: '0.97'
+      }, {
+        label: '崇明',
+        value: '2.27'
+      }]
+
+      this.tsysTotal = 7.1
+
+      this.yyData = [{
+        label: '浦东',
+        value: '1.48'
+      }, {
+        label: '宝山',
+        value: '0.09'
+      }, {
+        label: '闵行',
+        value: '0.1'
+      }, {
+        label: '嘉定',
+        value: '0.2'
+      }, {
+        label: '金山',
+        value: '1.31'
+      }, {
+        label: '松江',
+        value: '0.88'
+      }, {
+        label: '青浦',
+        value: '2.38'
+      }, {
+        label: '奉贤',
+        value: '2.35'
+      }, {
+        label: '崇明',
+        value: '7.77'
+      }]
+      this.yyTotal = 16.56
+    }
+  }
+}
 </script>
 
 <style scoped>

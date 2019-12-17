@@ -4,8 +4,8 @@
     </div>
 </template>
 <script>
-    import SheNongQu from "../components/SheNongQu/SheNongQu";
-    export default {
-        components: {SheNongQu}
-    }
+import SheNongQu from '../components/SheNongQu/SheNongQu'
+export default {
+  components: { SheNongQu }
+}
 </script>

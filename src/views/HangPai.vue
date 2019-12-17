@@ -24,7 +24,6 @@
                 </svg>
             </div>
 
-
             <div ref="card" class="xuanxiangka--card">
                 <div class="xuanxiangka--image" v-for="(item,i) in villages" :key="i" @click="changeIframe(item.url)">
                     <div class="img--container">
@@ -44,90 +43,89 @@
 </template>
 
 <script>
-    import wufang from '../assets/images/shijing/吴房村.jpg'
-    import tangwan from '../assets/images/shijing/塘湾村.jpg'
-    import xiangyang from '../assets/images/shijing/向阳村.jpg'
-    import yuanyi from '../assets/images/shijing/园艺村.jpg'
-    import shuiku from '../assets/images/shijing/水库村.jpg'
-    import lianhu from '../assets/images/shijing/莲湖村.jpg'
-    import zhaoqiao from '../assets/images/shijing/赵桥村.jpg'
-    import gexin from '../assets/images/shijing/革新村.jpg'
-    import huangqiao from '../assets/images/shijing/黄桥村.jpg'
+import wufang from '../assets/images/shijing/吴房村.jpg'
+import tangwan from '../assets/images/shijing/塘湾村.jpg'
+import xiangyang from '../assets/images/shijing/向阳村.jpg'
+import yuanyi from '../assets/images/shijing/园艺村.jpg'
+import shuiku from '../assets/images/shijing/水库村.jpg'
+import lianhu from '../assets/images/shijing/莲湖村.jpg'
+import zhaoqiao from '../assets/images/shijing/赵桥村.jpg'
+import gexin from '../assets/images/shijing/革新村.jpg'
+import huangqiao from '../assets/images/shijing/黄桥村.jpg'
 
-    export default {
-        name: "HangPai",
-        data() {
-            const villages = [
-                {
-                    name: '吴房村',
-                    img: wufang,
-                    url: ' https://720yun.com/t/zzlraaj55rim4gmwfr?from=singlemessage&isappinstalled=0&pano_id=rerl7tl98LIPQFrk'
-                },
-                {
-                    name: '塘湾村',
-                    img: tangwan,
-                    url: 'https://720yun.com/t/b1vkiwie5il?scene_id=34831695'
-                },
-                {
-                    name: '革新村',
-                    img: gexin,
-                    url: 'https://720yun.com/t/cevkul27517?scene_id=37690415'
-                },
-                {
-                    name: '水库村',
-                    img: shuiku,
-                    url: 'https://720yun.com/t/2evknlpls8e?scene_id=28657187'
-                },
-                {
-                    name: '赵桥村',
-                    img: zhaoqiao,
-                    url: 'https://720yun.com/t/4avkn9fbz17?scene_id=29738402'
-                },
-                {
-                    name: '向阳村',
-                    img: xiangyang,
-                    url: ''
-                },
-                {
-                    name: '园艺村',
-                    img: yuanyi,
-                    url: ''
-                }, {
-                    name: '莲湖村',
-                    img: lianhu,
-                    url: ''
-                }, {
-                    name: '黄桥村',
-                    img: huangqiao,
-                    url: ''
-                }
-            ]
+export default {
+  name: 'HangPai',
+  data () {
+    const villages = [
+      {
+        name: '吴房村',
+        img: wufang,
+        url: ' https://720yun.com/t/zzlraaj55rim4gmwfr?from=singlemessage&isappinstalled=0&pano_id=rerl7tl98LIPQFrk'
+      },
+      {
+        name: '塘湾村',
+        img: tangwan,
+        url: 'https://720yun.com/t/b1vkiwie5il?scene_id=34831695'
+      },
+      {
+        name: '革新村',
+        img: gexin,
+        url: 'https://720yun.com/t/cevkul27517?scene_id=37690415'
+      },
+      {
+        name: '水库村',
+        img: shuiku,
+        url: 'https://720yun.com/t/2evknlpls8e?scene_id=28657187'
+      },
+      {
+        name: '赵桥村',
+        img: zhaoqiao,
+        url: 'https://720yun.com/t/4avkn9fbz17?scene_id=29738402'
+      },
+      {
+        name: '向阳村',
+        img: xiangyang,
+        url: ''
+      },
+      {
+        name: '园艺村',
+        img: yuanyi,
+        url: ''
+      }, {
+        name: '莲湖村',
+        img: lianhu,
+        url: ''
+      }, {
+        name: '黄桥村',
+        img: huangqiao,
+        url: ''
+      }
+    ]
 
-            return {
-                showCard: false,
-                currentURL: villages[0].url,
-                villages
-            }
-        },
-        mounted() {
-        },
-        methods: {
-            changeIframe(url) {
-                if (url.length === 0) return
-                this.currentURL = url
-                this.showModal()
-            },
-            showModal() {
-                this.showCard = !this.showCard
-                if (this.showCard) {
-                    this.$refs.card.style.transform = 'scale(1,1)'
-                } else {
-                    this.$refs.card.style.transform = 'scale(0,0)'
-                }
-
-            }
-        }
+    return {
+      showCard: false,
+      currentURL: villages[0].url,
+      villages
     }
+  },
+  mounted () {
+  },
+  methods: {
+    changeIframe (url) {
+      if (url.length === 0) return
+      this.currentURL = url
+      this.showModal()
+    },
+    showModal () {
+      this.showCard = !this.showCard
+      if (this.showCard) {
+        this.$refs.card.style.transform = 'scale(1,1)'
+      } else {
+        this.$refs.card.style.transform = 'scale(0,0)'
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -190,7 +188,6 @@
     .svg--container svg {
         width: 1vw;
     }
-
 
     .xuanxiangka--card {
         position: relative;

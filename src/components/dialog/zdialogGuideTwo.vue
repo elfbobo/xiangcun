@@ -13,30 +13,30 @@
 </template>
 
 <script>
-    import DialogBase from '@/components/dialog/zdialogbase'
-    export default {
-        data() {
-            return {
-                title: '',
-                isShowDialog:false,
-                closeShowData:true,
-                autoCloseData:false
-            }
-        },
-        components:{
-            DialogBase
-        },
-        methods: {
-            init(closeShow,autoClose) {
-                this.closeShowData=closeShow;
-                this.autoCloseData=autoClose;
-                this.isShowDialog=true;  
-            },
-            cancelPop(){
-                this.isShowDialog=false;
-            }
-        },
+import DialogBase from '@/components/dialog/zdialogbase'
+export default {
+  data () {
+    return {
+      title: '',
+      isShowDialog: false,
+      closeShowData: true,
+      autoCloseData: false
     }
+  },
+  components: {
+    DialogBase
+  },
+  methods: {
+    init (closeShow, autoClose) {
+      this.closeShowData = closeShow
+      this.autoCloseData = autoClose
+      this.isShowDialog = true
+    },
+    cancelPop () {
+      this.isShowDialog = false
+    }
+  }
+}
 </script>
 
 <style scoped>

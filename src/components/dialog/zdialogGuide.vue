@@ -19,48 +19,46 @@
 </template>
 
 <script>
-    import DialogBase from '@/components/dialog/zdialogbase'
-    // import ShowIndexPage from '@/views/home'
-    export default {
-        data() {
-            return {
-                title: '',
-                isShowDialog:false,
-                closeShowData:true,
-                autoCloseData:false,
-                isShowInfo:false,
-                isShowPop:false
-            }
-        },
-        components:{
-            DialogBase,
-            // ShowIndexPage
-        },
-        methods: {
-            init(closeShow,autoClose,autoPlay,shows) {
-                this.closeShowData=closeShow;
-                this.autoCloseData=autoClose;
-                this.isShowDialog=shows;
-                this.$refs.showIndexPage.$refs.videoElements.playVideo()
-
-            },
-            cancelPop(){
-                this.isShowDialog=false;
-                this.$refs.showIndexPage.$refs.videoElements.stopVideo()
-            },
-            showPop(){
-                this.isShowPop=true;
-                this.isShowInfo=true;
-            },
-            hidePop(){
-                this.isShowInfo=false;
-                setTimeout(()=>{
-                    this.isShowPop=false;
-                },600)
-
-            }
-        },
+import DialogBase from '@/components/dialog/zdialogbase'
+// import ShowIndexPage from '@/views/home'
+export default {
+  data () {
+    return {
+      title: '',
+      isShowDialog: false,
+      closeShowData: true,
+      autoCloseData: false,
+      isShowInfo: false,
+      isShowPop: false
     }
+  },
+  components: {
+    DialogBase
+    // ShowIndexPage
+  },
+  methods: {
+    init (closeShow, autoClose, autoPlay, shows) {
+      this.closeShowData = closeShow
+      this.autoCloseData = autoClose
+      this.isShowDialog = shows
+      this.$refs.showIndexPage.$refs.videoElements.playVideo()
+    },
+    cancelPop () {
+      this.isShowDialog = false
+      this.$refs.showIndexPage.$refs.videoElements.stopVideo()
+    },
+    showPop () {
+      this.isShowPop = true
+      this.isShowInfo = true
+    },
+    hidePop () {
+      this.isShowInfo = false
+      setTimeout(() => {
+        this.isShowPop = false
+      }, 600)
+    }
+  }
+}
 </script>
 
 <style scoped>

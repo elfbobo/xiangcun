@@ -8,7 +8,7 @@
             :isFull=false
             ref='grainBase'
             :autoClose=autoCloseData
-            > 
+            >
             <div class="chart-body">
                 <div class="view-title clearfix">
                     <h4>{{maptitle}}简介</h4>
@@ -38,7 +38,7 @@
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -49,78 +49,77 @@
 </template>
 
 <script>
-    import DialogBase from '@/components/dialog/zdialogbase'
-    import DialogMark from '@/components/dialog/dialoMark'
-    import Swiper from 'swiper';
-    export default {
-        data() {
-            return {
-                title: '',
-                src:'https://www.baidu.com',
-                isShowDialog:false,
-                autoCloseData:false,
-                clickIndex:2,
-                maptitle:'',
-                videoUrl:'',
-                dataDesc:'',
-                imgUrlData:[],
-                iframeUrl:'',
-                startIndex:0,
-                videoShow:false,
-                mySwiper:null
-            }
-        },
-        components:{
-            DialogBase,
-            DialogMark
-        },
-        mounted(){
-            this.$nextTick(()=>{
-                this.mySwiper=new Swiper ('.swiper-container', {
-                    autoplay: {
-                    delay: 6000,
-                    stopOnLastSlide: false,
-                    disableOnInteraction: true,
-                    },
-                    speed:500,
-                     freeMode: false,
-                observer:true,
-                observeParents:true,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                })  
-            })
-                   
-        },
-        methods: {
-            init(data,imgUrl,showIndex,activeIndex) {
-                this.maptitle=data.name;
-                this.videoShow=data.videoShow;
-              //   if(data.videoShow){
-              //        this.videoUrl=require('../../../static/'+data.id+'_hp.mp4');
-              //   }
-              //  if(!!this.$refs.isReplay){
-              //      this.$refs.isReplay.currentTime=0;
-              //      this.$refs.isReplay.play();
-              //  }
-                this.dataDesc=data.mapDesc;
-                this.imgUrlData=imgUrl
-                
-                this.isShowDialog=true;
-                this.iframeUrl=data.iframeUrl;
-                this.clickIndex=showIndex;
-                this.mySwiper.activeIndex=activeIndex;
-            },
-            cancelPop(){
-                this.isShowDialog=false;
-                // if(!!this.$refs.isReplay){
-                //      this.$refs.isReplay.pause();
-                // }
-            }
-        },
+import DialogBase from '@/components/dialog/zdialogbase'
+import DialogMark from '@/components/dialog/dialoMark'
+import Swiper from 'swiper'
+export default {
+  data () {
+    return {
+      title: '',
+      src: 'https://www.baidu.com',
+      isShowDialog: false,
+      autoCloseData: false,
+      clickIndex: 2,
+      maptitle: '',
+      videoUrl: '',
+      dataDesc: '',
+      imgUrlData: [],
+      iframeUrl: '',
+      startIndex: 0,
+      videoShow: false,
+      mySwiper: null
     }
+  },
+  components: {
+    DialogBase,
+    DialogMark
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.mySwiper = new Swiper('.swiper-container', {
+        autoplay: {
+          delay: 6000,
+          stopOnLastSlide: false,
+          disableOnInteraction: true
+        },
+        speed: 500,
+        freeMode: false,
+        observer: true,
+        observeParents: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      })
+    })
+  },
+  methods: {
+    init (data, imgUrl, showIndex, activeIndex) {
+      this.maptitle = data.name
+      this.videoShow = data.videoShow
+      //   if(data.videoShow){
+      //        this.videoUrl=require('../../../static/'+data.id+'_hp.mp4');
+      //   }
+      //  if(!!this.$refs.isReplay){
+      //      this.$refs.isReplay.currentTime=0;
+      //      this.$refs.isReplay.play();
+      //  }
+      this.dataDesc = data.mapDesc
+      this.imgUrlData = imgUrl
+
+      this.isShowDialog = true
+      this.iframeUrl = data.iframeUrl
+      this.clickIndex = showIndex
+      this.mySwiper.activeIndex = activeIndex
+    },
+    cancelPop () {
+      this.isShowDialog = false
+      // if(!!this.$refs.isReplay){
+      //      this.$refs.isReplay.pause();
+      // }
+    }
+  }
+}
 </script>
 
 <style scoped>

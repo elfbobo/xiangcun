@@ -14,15 +14,15 @@
 </template>
 
 <script>
-    export default {
-        name: "ChartTitle",
-        props: {
-            subtitle: {
-                type: String,
-                default: ''
-            }
-        }
+export default {
+  name: 'ChartTitle',
+  props: {
+    subtitle: {
+      type: String,
+      default: ''
     }
+  }
+}
 </script>
 
 <style scoped>

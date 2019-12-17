@@ -4,8 +4,9 @@
     </div>
 </template>
 <script>
-    import TuijingContainer from "../components/MingXi/TuijingContainer";
-    export default {
-        components: {TuijingContainer}
-    }
+import TuijingContainer from '../components/MingXi/TuijingContainer'
+
+export default {
+  components: { TuijingContainer }
+}
 </script>

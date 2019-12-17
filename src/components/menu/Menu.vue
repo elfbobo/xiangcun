@@ -133,34 +133,34 @@
 </template>
 
 <script>
-    import TaskPieChart from '../pie/TaskPieChart'
-    export default {
-        name: "MenuContent",
-        mounted () {
-            this.$nextTick(() => {
-                this.getTaskChart()
-            })
-        },
-        components: {
-            TaskPieChart
-        },
-        methods: {
-            getTaskChart () {
-                const colorOne = ['#04f4fb', '#ffffff']
-                const taskDataOne = {
-                    value: 80.17,
-                    title: '督办办结率'
-                }
-                const colorTwo = ['#fbb919', '#ffffff']
-                const taskDataTwo = {
-                    value: 0.45,
-                    title: '督办预期率'
-                }
-                this.$refs.taskChart1.init(colorOne, taskDataOne)
-                this.$refs.taskChart2.init(colorTwo, taskDataTwo)
-            }
-        }
+import TaskPieChart from '../pie/TaskPieChart'
+export default {
+  name: 'MenuContent',
+  mounted () {
+    this.$nextTick(() => {
+      this.getTaskChart()
+    })
+  },
+  components: {
+    TaskPieChart
+  },
+  methods: {
+    getTaskChart () {
+      const colorOne = ['#04f4fb', '#ffffff']
+      const taskDataOne = {
+        value: 80.17,
+        title: '督办办结率'
+      }
+      const colorTwo = ['#fbb919', '#ffffff']
+      const taskDataTwo = {
+        value: 0.45,
+        title: '督办预期率'
+      }
+      this.$refs.taskChart1.init(colorOne, taskDataOne)
+      this.$refs.taskChart2.init(colorTwo, taskDataTwo)
     }
+  }
+}
 </script>
 
 <style scoped>

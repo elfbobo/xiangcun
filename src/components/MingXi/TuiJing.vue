@@ -9,191 +9,189 @@
             </span>
         </div>
 
-
         <div class="tuijing-chart" ref="tuijing"></div>
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
-    import echarts from 'echarts/lib/echarts'
-    import 'echarts/lib/chart/bar'
-    import 'echarts/lib/component/axis'
-    import 'echarts/lib/component/title'
-    import 'echarts/lib/component/tooltip'
-    import 'echarts/lib/component/grid'
-    import 'echarts/lib/component/visualMap'
+import axios from 'axios'
+import echarts from 'echarts/lib/echarts'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/axis'
+import 'echarts/lib/component/title'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/grid'
+import 'echarts/lib/component/visualMap'
 
-
-    export default {
-        name: "TuiJing",
-        props: {
-            title: {
-                type: String,
-                default: '任务推进情况'
-            },
-            selectedDistrict: {
-                type: String,
-                default: '浦东新区'
-            },
-            month: {
-              type: [Boolean, String],
-              default: false
-            },
-            startColor: {
-                type: String,
-                default: '#14c396',
-                validator(value) {
-                    return !!value.match(/^(#|(rgb|hsl)a?\()/)
-                }
-            },
-            endColor: {
-                type: String,
-                default: '#1484c8',
-                validator(value) {
-                    return !!value.match(/^(#|(rgb|hsl)a?\()/);
-                }
-            },
-            grow: Boolean
-        },
-        watch: {
-            selectedDistrict: {
-                handler(old, newVal) {
-                    if (old === newVal) {
-                        return
-                    }
-                    this.setOptionsData(newVal, this.month)
-                },
-            },
-        },
-        data: () => ({
-            chart: undefined,
-            options: {
-                grid: {
-                    left: '2.5%',
-                    right: '2%',
-                    bottom: '10%',
-                    top: '10%'
-                },
-                visualMap: {
-                    show: false,
-                    min: 0,
-                    max: 50,
-                    dimension: 0,
-                    inRange: {
-                        color: ['#4a657a', '#ef5055']
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    x: 0,
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: 'rgba(4,244,251,0.3)'
-                        }
-                    },
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: '70%'
-                        }
-                    },
-                    splitNumber: 20,
-                    axisPointer: {},
-                    data: []
-                },
-                yAxis: {
-                    type: 'value',
-                    splitLine: {
-                        lineStyle: {
-                            color: 'rgba(4,244,251,0.3)'
-                        }
-                    },
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: '70%'
-                        },
-                        formatter: '{value} %'
-                    }
-                },
-                tooltip: {
-                    show: true,
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'line'
-                    },
-                    textStyle: {
-                        fontSize: '80%',
-                    },
-                    renderMode: 'html',
-                    formatter: function (params) {
-                        const param = params[0]
-                        return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:0.5vw;height:0.5vw;background-color:${param.color};"></span>`
-                            + param.axisValue + '<br />' + param.name + '<br />' + param.value + '%'
-                    }
-                },
-                series: [{
-                    type: 'bar',
-                    itemStyle: {
-                        barBorderRadius: 20
-                    },
-                    tooltip: {
-                        show: true,
-
-                    },
-                    barWidth: '50%',
-                    data: [],
-
-                }]
-            }
-        }),
-        created() {
-            this.options.visualMap.inRange.color = [this.startColor, this.endColor]
-        },
-        mounted() {
-            this.setOptionsData(this.selectedDistrict, this.month)
-        },
-        methods: {
-            setChart() {
-                if (!this.chart) {
-                    this.chart = echarts.init(this.$refs.tuijing, null, {renderer: 'canvas'})
-                }
-                this.chart.setOption(this.options)
-            },
-            setValue(name = 'hehe', percent = 100) {
-                return {
-                    name: name,
-                    value: percent
-                }
-            },
-            setOptionsData(val = '', month = false) {
-                if (!val) return
-                const instance = axios.create({
-                    baseURL: 'http://localhost:8081/api'
-                })
-                instance.get(`/snqmx/${val}${!month ? '/' : '/'+month}`).then(({status,data}) => {
-                    if (status === 200) {
-                        const arr = []
-                        const arrIndex= []
-                        for (let i = 0; i < data.length; i++) {
-                            arr.push(this.setValue(data[i].name,data[i].value))
-                            arrIndex.push(data[i].index)
-                        }
-                        this.options.series[0].data = arr
-                        this.options.xAxis.data = arrIndex
-                        this.setChart()
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-            },
-
+export default {
+  name: 'TuiJing',
+  props: {
+    title: {
+      type: String,
+      default: '任务推进情况'
+    },
+    selectedDistrict: {
+      type: String,
+      default: '浦东新区'
+    },
+    month: {
+      type: [Boolean, String],
+      default: false
+    },
+    startColor: {
+      type: String,
+      default: '#14c396',
+      validator (value) {
+        return !!value.match(/^(#|(rgb|hsl)a?\()/)
+      }
+    },
+    endColor: {
+      type: String,
+      default: '#1484c8',
+      validator (value) {
+        return !!value.match(/^(#|(rgb|hsl)a?\()/)
+      }
+    },
+    grow: Boolean
+  },
+  watch: {
+    selectedDistrict: {
+      handler (old, newVal) {
+        if (old === newVal) {
+          return
         }
+        this.setOptionsData(newVal, this.month)
+      }
     }
+  },
+  data: () => ({
+    chart: undefined,
+    options: {
+      grid: {
+        left: '2.5%',
+        right: '2%',
+        bottom: '10%',
+        top: '10%'
+      },
+      visualMap: {
+        show: false,
+        min: 0,
+        max: 50,
+        dimension: 0,
+        inRange: {
+          color: ['#4a657a', '#ef5055']
+        }
+      },
+      xAxis: {
+        type: 'category',
+        x: 0,
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#fff',
+            fontSize: '70%'
+          }
+        },
+        splitNumber: 20,
+        axisPointer: {},
+        data: []
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#fff',
+            fontSize: '70%'
+          },
+          formatter: '{value} %'
+        }
+      },
+      tooltip: {
+        show: true,
+        trigger: 'axis',
+        axisPointer: {
+          type: 'line'
+        },
+        textStyle: {
+          fontSize: '80%'
+        },
+        renderMode: 'html',
+        formatter: function (params) {
+          const param = params[0]
+          return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:0.5vw;height:0.5vw;background-color:${param.color};"></span>` +
+                            param.axisValue + '<br />' + param.name + '<br />' + param.value + '%'
+        }
+      },
+      series: [{
+        type: 'bar',
+        itemStyle: {
+          barBorderRadius: 20
+        },
+        tooltip: {
+          show: true
+
+        },
+        barWidth: '50%',
+        data: []
+
+      }]
+    }
+  }),
+  created () {
+    this.options.visualMap.inRange.color = [this.startColor, this.endColor]
+  },
+  mounted () {
+    this.setOptionsData(this.selectedDistrict, this.month)
+  },
+  methods: {
+    setChart () {
+      if (!this.chart) {
+        this.chart = echarts.init(this.$refs.tuijing, null, { renderer: 'canvas' })
+      }
+      this.chart.setOption(this.options)
+    },
+    setValue (name = 'hehe', percent = 100) {
+      return {
+        name: name,
+        value: percent
+      }
+    },
+    setOptionsData (val = '', month = false) {
+      if (!val) return
+      const instance = axios.create({
+        baseURL: 'http://localhost:8081/api'
+      })
+      instance.get(`/snqmx/${val}${!month ? '/' : '/' + month}`).then(({ status, data }) => {
+        if (status === 200) {
+          const arr = []
+          const arrIndex = []
+          for (let i = 0; i < data.length; i++) {
+            arr.push(this.setValue(data[i].name, data[i].value))
+            arrIndex.push(data[i].index)
+          }
+          this.options.series[0].data = arr
+          this.options.xAxis.data = arrIndex
+          this.setChart()
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+
+  }
+}
 </script>
 
 <style scoped>

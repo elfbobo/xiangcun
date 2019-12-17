@@ -45,90 +45,88 @@
 </template>
 
 <script>
-    import gou from '../../assets/images/icons/gou.png'
-    import quan from '../../assets/images/icons/quan.png'
-    import sanjiao from '../../assets/images/icons/sanjiao.png'
-    import ChartTitle from "../ChartTitle";
+import gou from '../../assets/images/icons/gou.png'
+import quan from '../../assets/images/icons/quan.png'
+import sanjiao from '../../assets/images/icons/sanjiao.png'
+import ChartTitle from '../ChartTitle'
 
-    export default {
-        name: "TableContent",
-        components: {ChartTitle},
-        props: {
-            title: {
-                type: String,
-                default: '推进情况'
-            },
-            districts: {
-                type: [Boolean, Array],
-                default: () => ([])
-            },
-            strict: Boolean,
-            arr: {
-                type: [Boolean, Array],
-                default: false
-            }
-        },
-        watch: {
-            arr: {
-                handler(old, newVal) {
-                    if (old === newVal) return
-                    if (!old) return
-
-                    if (this.strict) {
-                        this.processedArray = this.processArray(old)
-                    } else {
-                        this.processedArray = old
-                    }
-
-
-                    this.currentArray = this.processedArray.slice(0, 20)
-                },
-            }
-        },
-        data: () => ({
-            icons: [{img: quan, name: '按计划推进'}, {img: gou, name: '已完成'}, {img: sanjiao, name: '滞后'}],
-            currentArray: [],
-            processedArray: [],
-            currentPage: 1
-        }),
-        computed: {
-            pages() {
-                return Math.ceil(this.processedArray.length / 20) || 1
-            }
-        },
-        mounted() {
-
-        },
-        methods: {
-            transferIcon(num = 0) {
-                switch (num) {
-                    case 1:
-                        return quan
-                    case 2:
-                        return gou
-                    case 3:
-                        return sanjiao
-                    default:
-                        return
-                }
-            },
-            hasPositive(arr = []) {
-                if (arr.length === 0) return false
-                return arr.reduce((prev, next) => prev + next, 0) > 0
-            },
-            processArray(arr = []) {
-                return arr.reduce((prev, next) => {
-                    if (this.hasPositive(next.value)) prev.push(next)
-                    return prev
-                }, [])
-            },
-            onChangePage(p) {
-                if (!p) return
-                this.currentPage = p
-                this.currentArray = this.processedArray.slice((p - 1) * 20, (p - 1) * 20 + 20)
-            }
-        }
+export default {
+  name: 'TableContent',
+  components: { ChartTitle },
+  props: {
+    title: {
+      type: String,
+      default: '推进情况'
+    },
+    districts: {
+      type: [Boolean, Array],
+      default: () => ([])
+    },
+    strict: Boolean,
+    arr: {
+      type: [Boolean, Array],
+      default: false
     }
+  },
+  watch: {
+    arr: {
+      handler (old, newVal) {
+        if (old === newVal) return
+        if (!old) return
+
+        if (this.strict) {
+          this.processedArray = this.processArray(old)
+        } else {
+          this.processedArray = old
+        }
+
+        this.currentArray = this.processedArray.slice(0, 20)
+      }
+    }
+  },
+  data: () => ({
+    icons: [{ img: quan, name: '按计划推进' }, { img: gou, name: '已完成' }, { img: sanjiao, name: '滞后' }],
+    currentArray: [],
+    processedArray: [],
+    currentPage: 1
+  }),
+  computed: {
+    pages () {
+      return Math.ceil(this.processedArray.length / 20) || 1
+    }
+  },
+  mounted () {
+
+  },
+  methods: {
+    transferIcon (num = 0) {
+      switch (num) {
+        case 1:
+          return quan
+        case 2:
+          return gou
+        case 3:
+          return sanjiao
+        default:
+      }
+    },
+    hasPositive (arr = []) {
+      if (arr.length === 0) return false
+      return arr.reduce((prev, next) => prev + next, 0) > 0
+    },
+    processArray (arr = []) {
+      return arr.reduce((prev, next) => {
+        if (this.hasPositive(next.value)) prev.push(next)
+        return prev
+      }, [])
+    },
+    onChangePage (p) {
+      if (!p) return
+      this.currentPage = p
+      this.currentArray = this.processedArray.slice((p - 1) * 20, (p - 1) * 20 + 20)
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -194,7 +192,6 @@
                 td {
                     height: 0.8vw;
 
-
                     &:first-child {
                         width: 8vw;
                         text-align: start;
@@ -220,7 +217,6 @@
             }
 
         }
-
 
     }
 
