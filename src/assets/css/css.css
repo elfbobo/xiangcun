@@ -70,8 +70,8 @@ a{text-decoration: none;color:#04f4fb;}
 .task-pie-data span{display:block;}
 .task-chart-one{padding-right:.23rem;}
 
-.main{padding-top: .083rem;display: flex;position: relative;flex: 1 0 auto;max-height: calc(4.5rem - .38rem)}
-
+.main{padding-top: .083rem;display: flex;flex: 1 0 auto;max-height: calc(4.5rem - .38rem)}
+/* position: relative; */
 
 /*beautiful*/
 .chart-main{padding:0 .2083rem;width:12rem;box-sizing: border-box;}
@@ -237,9 +237,14 @@ a{text-decoration: none;color:#04f4fb;}
 .view-left-img .beforeMark,.view-left-img .afterMark{position: absolute;width:.504rem;height: .25rem;left:.15rem;line-height: .25rem; top: .15rem;font-size: .133rem;background:rgba(0,0,0,.6);}
 .swiper-button-prev, .swiper-container-rtl .swiper-button-next{left:.2rem;}
 .swiper-button-next, .swiper-container-rtl .swiper-button-prev{right:.2rem;}
-.view-description{font-size: .13rem;line-height: 2;padding:.2rem 0 0 .2rem;text-align: left;text-indent: .18rem;}
+.view-description{font-size: .13rem;line-height: 2;padding:.2rem 0 0 .2rem;text-align: left;text-indent: .18rem;float: left;}
 .view-top-img{
     margin-bottom:.1rem
+}
+.view-description {
+    float: left;
+    width: 45%;
+    box-sizing: border-box;
 }
 
 

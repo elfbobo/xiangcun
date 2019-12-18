@@ -102,11 +102,11 @@ export default {
     transferIcon (num = 0) {
       switch (num) {
         case 1:
-          return quan
-        case 2:
           return gou
-        case 3:
+        case 2:
           return sanjiao
+        case 3:
+          return quan
         default:
       }
     },

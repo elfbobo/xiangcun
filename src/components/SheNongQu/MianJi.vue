@@ -82,12 +82,24 @@ export default {
           },
           formatter: function (params) {
             let res = ''
-            const maxW = 10
+            const maxW = 6
             const rowNumber = Math.ceil(params.length / maxW)
             for (let i = 0; i < rowNumber; i++) {
               res += params.slice(i * maxW, i * maxW + maxW) + '\n'
             }
             return res
+          }
+        },
+        axisTick: {
+          show: false,
+          lineStyle: {
+            show: false,
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
           }
         },
         data: ['宝山', '浦东', '嘉定', '崇明', '奉贤', '松江', '青浦', '闵行', '金山']
@@ -109,6 +121,18 @@ export default {
             fontSize: '7%'
           },
           formatter: '{value} %'
+        },
+        axisTick: {
+          show: false,
+          lineStyle: {
+            show: false,
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
         }
 
       },

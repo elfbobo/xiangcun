@@ -2,7 +2,7 @@
     <div class="tuijings">
         <ul class="tuijings--select__container">
             <li class="tuijings--select"
-                :class="{'tuijings--active': selectedDistrict === district}"
+                :class="{'tuijings--active': selectedDistrict.name === district}"
                 v-for="(district,i) in districts" :key="i"
                 @click="selectDistrict(district)"
             >
@@ -11,12 +11,12 @@
         </ul>
         <div style="display: flex;flex-direction: column;flex: 1 1 auto;position: relative">
             <tui-jing
-                    title="2019年1月至11月77项相关委办局重点任务推进情况"
+                    :title="title1"
                     :selected-district="selectedDistrict"
                     month="overall"
             ></tui-jing>
             <tui-jing
-                    title="11月77项相关委办局重点任务推进情况"
+                    :title="title2"
                     :selected-district="selectedDistrict"
                     start-color="#1f72a3"
                     end-color="#bb9528"
@@ -29,23 +29,38 @@
 
 <script>
 import TuiJing from './TuiJing'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'TuijingContainer',
   components: { TuiJing },
   data () {
-    const districts = ['浦东新区', '闵行区', '嘉定区', '宝山区', '奉贤区', '松江区', '金山区', '青浦区', '崇明区']
+    const districts = this.$store.state.dataDetail.districts
     return {
       selectedDistrict: districts[0],
-      districts
+      rawDistricts: districts,
+      districts: districts.reduce((prev, next) => prev.concat(next.name), [])
     }
+  },
+  computed: {
+    ...mapGetters({
+      currentYear: 'dataDetail/currentYear',
+      currentMonth: 'dataDetail/currentMonth'
+    }),
+    title1 () {
+      return `${this.currentYear}年1月至${this.currentMonth}月`
+    },
+    title2 () {
+      return `${this.currentMonth}月`
+    }
+
   },
   methods: {
     selectDistrict (district) {
       if (!district) {
         return
       }
-      this.selectedDistrict = district
+      this.selectedDistrict = this.rawDistricts.filter(ele => ele.name === district)[0]
     }
   }
 }

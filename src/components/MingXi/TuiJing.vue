@@ -2,10 +2,10 @@
     <div class="tuijing--container">
         <div class="tuijing--header">
             <span class="tuijing--select--span"></span>
-            <span>{{ selectedDistrict }}</span>
+            <span>{{ selectedDistrict.name }}</span>
             <span>——</span>
             <span class="tuijing--title">
-                {{ title }}
+                {{ title }}{{ itemsNumber }}项相关委办局重点任务推进情况
             </span>
         </div>
 
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../utils/axiosRequest'
 import echarts from 'echarts/lib/echarts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/axis'
@@ -22,7 +22,7 @@ import 'echarts/lib/component/title'
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/visualMap'
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'TuiJing',
   props: {
@@ -31,8 +31,8 @@ export default {
       default: '任务推进情况'
     },
     selectedDistrict: {
-      type: String,
-      default: '浦东新区'
+      type: Object,
+      default: () => ({})
     },
     month: {
       type: [Boolean, String],
@@ -56,16 +56,18 @@ export default {
   },
   watch: {
     selectedDistrict: {
-      handler (old, newVal) {
+      handler (newVal, old) {
         if (old === newVal) {
           return
         }
         this.setOptionsData(newVal, this.month)
-      }
+      },
+      deep: true
     }
   },
   data: () => ({
     chart: undefined,
+    itemsNumber: 77,
     options: {
       grid: {
         left: '2.5%',
@@ -98,6 +100,17 @@ export default {
             fontSize: '70%'
           }
         },
+        axisTick: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+
+        },
         splitNumber: 20,
         axisPointer: {},
         data: []
@@ -116,8 +129,19 @@ export default {
             fontSize: '70%'
           },
           formatter: '{value} %'
+        },
+        axisTick: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
         }
       },
+
       tooltip: {
         show: true,
         trigger: 'axis',
@@ -155,6 +179,13 @@ export default {
   mounted () {
     this.setOptionsData(this.selectedDistrict, this.month)
   },
+  computed: {
+    ...mapGetters({
+      currentYear: 'dataDetail/currentYear',
+      currentMonth: 'dataDetail/currentMonth',
+      currentDay: 'dataDetail/currentDay'
+    })
+  },
   methods: {
     setChart () {
       if (!this.chart) {
@@ -168,18 +199,33 @@ export default {
         value: percent
       }
     },
-    setOptionsData (val = '', month = false) {
-      if (!val) return
-      const instance = axios.create({
-        baseURL: 'http://localhost:8081/api'
-      })
-      instance.get(`/snqmx/${val}${!month ? '/' : '/' + month}`).then(({ status, data }) => {
+    setOptionsData (obj = {}, month = '') {
+      if (!month) return
+      let params = {}
+      if (month === 'overall') {
+        params = {
+          begin: `${this.currentYear}-01-01`,
+          end: `${this.currentYear}-${this.currentMonth}-${this.currentDay}`,
+          qx: obj.code
+        }
+      } else {
+        params = {
+          month: this.currentMonth,
+          qx: obj.code
+        }
+      }
+      axios({
+        url: month === 'overall' ? this.$store.state.dataDetail.urls.tuijin.overall : this.$store.state.dataDetail.urls.tuijin.current,
+        params
+      }).then(({ status, data }) => {
         if (status === 200) {
           const arr = []
           const arrIndex = []
+          this.itemsNumber = data.length
           for (let i = 0; i < data.length; i++) {
-            arr.push(this.setValue(data[i].name, data[i].value))
-            arrIndex.push(data[i].index)
+            const [index, name] = data[i][month === 'overall' ? 'zdrwjc' : 'name'].split('-')
+            arr.push(this.setValue(name, parseFloat(data[i].p)))
+            arrIndex.push(index)
           }
           this.options.series[0].data = arr
           this.options.xAxis.data = arrIndex

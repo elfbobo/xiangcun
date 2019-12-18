@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import dataDetail from './dataDetail'
 
 Vue.use(Vuex)
 
@@ -23,5 +24,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    dataDetail
   }
 })

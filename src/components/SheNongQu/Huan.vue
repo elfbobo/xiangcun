@@ -183,7 +183,7 @@ export default {
     }
 
     .huan--legend__table tr td span:last-child {
-        font-size: 0.3vw;
+        font-size: 0.4vw;
         margin-left: 0.3vw;
     }
 

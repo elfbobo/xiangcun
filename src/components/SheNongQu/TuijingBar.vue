@@ -58,6 +58,19 @@ export default {
             fontSize: '9%'
           }
         },
+        axisTick: {
+          show: false,
+
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+
         data: []
       },
       xAxis: {
@@ -71,6 +84,17 @@ export default {
         },
         axisLabel: {
           show: false
+        },
+        axisTick: {
+          show: false,
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(4,244,251,0.3)'
+          }
         }
       },
       series: [{
@@ -88,10 +112,10 @@ export default {
           }
         },
         itemStyle: {
-          color: '#04f4fb',
-          barBorderRadius: [20, 0, 0, 20]
+          color: '#04f4fb'
+          // barBorderRadius: [20, 0, 0, 20]
         },
-        barWidth: '60%',
+        barWidth: '50%',
         name: '按计划推进',
         data: []
       }, {
@@ -128,8 +152,8 @@ export default {
           }
         },
         itemStyle: {
-          color: '#fbb919',
-          barBorderRadius: [0, 20, 20, 0]
+          color: '#fbb919'
+          // barBorderRadius: [0, 20, 20, 0]
         },
         data: []
       }]
@@ -146,7 +170,7 @@ export default {
              * ]
              * @param dataArray
              */
-    setOptionData (dataArray = dataArray) {
+    setOptionData (dataArray = []) {
       if (!dataArray || dataArray.length === 0) {
         return
       }
