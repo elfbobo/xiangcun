@@ -13,14 +13,12 @@ const http = axios.create({
 })
 
 if (process.env.NODE_ENV === 'development') {
-  http.defaults.baseURL = 'http://203.156.203.8'
   // http.defaults.baseURL = 'http://192.168.26.20';
   // http.defaults.baseURL = 'http://localhost:8080';
   http.defaults.baseURL = 'http://localhost:8010'
 } else if (process.env.NODE_ENV === 'debug') {
   console.log()
 } else if (process.env.NODE_ENV === 'production') {
-  http.defaults.baseURL = 'http://203.156.203.8'
   // http.defaults.baseURL = 'http://192.168.26.20';
   http.defaults.baseURL = 'http://localhost:8010'
 }

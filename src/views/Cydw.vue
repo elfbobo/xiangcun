@@ -44,9 +44,10 @@ export default {
         if (status === 200) {
           if (!this.$refs[refName]) return
           const processed = data.reduce((prev, next) => {
+              const v = parseFloat(next.p)
             return prev.concat({
               name: next.subcompanyname,
-              value: next.p
+              value: v || 0
             })
           }, [])
           this.$refs[refName].setOptionData(processed)

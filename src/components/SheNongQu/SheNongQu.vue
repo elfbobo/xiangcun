@@ -105,7 +105,7 @@ export default {
         this.$refs[i === 0 ? 'bar1' : 'bar2'].setOptionData(res)
       } else if (type === 'line') {
         res.forEach(ele => {
-          ele.value = parseFloat(ele.result)
+          ele.value = parseFloat(ele.result) || 0
           ele.name = ele.name.split('-')[1].slice(0, 2)
         })
         this.$refs[i === 0 ? 'mianji1' : 'mianji2'].setOptionData(res, parseFloat(res[0]['jjx']))
@@ -122,7 +122,6 @@ export default {
           }
           return prev
         }, { finished: 0, delayed: 0, processing: 0 })
-        console.log(obj)
         this.huan[i === 0 ? 'first' : 'second'] = obj
         this.$refs[i === 0 ? 'huan1' : 'huan2'].setChart(obj)
       }

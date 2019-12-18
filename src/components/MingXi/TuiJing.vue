@@ -5,7 +5,7 @@
             <span>{{ selectedDistrict.name }}</span>
             <span>——</span>
             <span class="tuijing--title">
-                {{ title }}{{ itemsNumber }}项相关委办局重点任务推进情况
+                {{ title }}77项相关委办局重点任务推进情况
             </span>
         </div>
 

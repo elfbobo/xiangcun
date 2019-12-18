@@ -13,9 +13,9 @@ const state = {
     { name: '宝山区', code: 310113, alias: 'bsq', short: '宝山' }
   ],
   current: {
-    month: new Date().getMonth() + 1,
+    month: new Date().getMonth()  === 0 ? 1 : new Date().getMonth(),
     year: new Date().getFullYear(),
-    day: new Date().getDay()
+    day: new Date().getDate()
   },
   urls: {
     mianji: {
