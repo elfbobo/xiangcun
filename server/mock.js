@@ -22,8 +22,7 @@ for (let i = 0; i < fileList.length; i++) {
   })
 }
 
-app.use(router.routes())
-  .use(router.allowedMethods())
+app.use(router.routes()).use(router.allowedMethods())
 const port = 8081
 app.listen(port, () => {
   console.log(`listening on ${port} ...`)

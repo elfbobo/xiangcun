@@ -3,7 +3,7 @@
         <div class="wrap">
             <div class="header">
                 <div class="logo"
-                     v-if="$route.path==='/' || $route.path==='/cydw' || $route.path==='/snq' || $route.path==='/snqmx'">
+                     v-if="$route.path==='/' || $route.path==='/cydw' || $route.path==='/snq' || $route.path==='/snqmx' || $route.path==='/zdrw'">
                     <a href="http://192.168.26.147"><img src="@/assets/images/logo-1.png" alt=""></a></div>
                 <div class="b-logo logo-sy" v-if="$route.path==='/beautiful'"><a href="/" class="l-m"><img
                         src="@/assets/images/b-logo-main.png" alt=""></a><img src="@/assets/images/logo-split.png"

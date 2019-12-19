@@ -105,7 +105,7 @@ export default {
             show: true,
             textStyle: {
               color: '#000',
-              fontSize: '8%'
+              fontSize: '7%'
 
             }
 
@@ -126,7 +126,7 @@ export default {
             show: true,
             textStyle: {
               color: '#000',
-              fontSize: '8%'
+              fontSize: '7%'
             }
           }
         },
@@ -145,7 +145,7 @@ export default {
             show: true,
             textStyle: {
               color: '#000',
-              fontSize: '8%'
+              fontSize: '7%'
 
             }
 
