@@ -4,7 +4,7 @@
             <div class="header">
                 <div class="logo"
                      v-if="$route.path==='/' || $route.path==='/cydw' || $route.path==='/snq' || $route.path==='/snqmx'">
-                    <a href="https://www.baidu.com"><img src="@/assets/images/logo-1.png" alt=""></a></div>
+                    <a href="http://192.168.26.147"><img src="@/assets/images/logo-1.png" alt=""></a></div>
                 <div class="b-logo logo-sy" v-if="$route.path==='/beautiful'"><a href="/" class="l-m"><img
                         src="@/assets/images/b-logo-main.png" alt=""></a><img src="@/assets/images/logo-split.png"
                                                                               alt="" class="l-s"><a

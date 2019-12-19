@@ -5,7 +5,7 @@
             <div class="menu-top-list">
                 <div class="link-list">
                     <div class="top-link-item">
-                        <router-link to='/' class="link-num" active-class="active-class" exact>77</router-link>
+                        <router-link to='/zdrw' class="link-num" active-class="active-class">77</router-link>
                         <div class="link-item-title">
                             <span class="link-item-year">2019</span>
                             <span class="link-item-desc">重点任务(项)</span>
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="top-link-item">
-                        <router-link to='/snq' class="link-num" active-class="active-class">9</router-link>
+                        <router-link to='/' class="link-num" active-class="active-class" exact>9</router-link>
                         <div class="link-item-title">
                             <router-link to='/snqmx' class="link-item-year" active-class="active-class">明细</router-link>
                             <span class="link-item-desc">涉农区(个)</span>
@@ -62,7 +62,7 @@
             <div class="menu-title">三园工程</div>
             <div class="bottom-link-list">
                 <div class="bottom-link-line">
-                    <router-link to="/beautiful" class="sy-link-item" active-class="active-class">
+                    <div class="sy-link-item" :class="{'active-class': $route.path.includes('beautiful')}" @click.capture="linkTo('/beautiful')">
                         <div class="sy-item-line">
                             <div class="sy-title sy-b-title">
                                 <span class="sy-title-name">美丽家园</span>
@@ -76,13 +76,13 @@
                                     <em>85 <i>个</i></em>
                                     <span>美丽乡村示范村</span>
                                 </div>
-                                <div class="sy-total-line">
+                                <div class="sy-total-line" @click.capture="linkTo('/hangpai')">
                                     <em>37 <i>个</i></em>
                                     <span>乡村振兴示范村</span>
                                 </div>
                             </div>
                         </div>
-                    </router-link>
+                    </div>
                     <router-link to="/green" class="sy-link-item" active-class="active-class">
                         <div class="sy-item-line">
                             <div class="sy-title sy-g-title">
@@ -145,6 +145,9 @@ export default {
     TaskPieChart
   },
   methods: {
+    linkTo (url) {
+      this.$router.push(url)
+    },
     getTaskChart () {
       const colorOne = ['#04f4fb', '#ffffff']
       const taskDataOne = {
@@ -164,5 +167,7 @@ export default {
 </script>
 
 <style scoped>
-
+.sy-link-item:hover {
+  cursor: pointer;
+}
 </style>

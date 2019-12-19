@@ -76,6 +76,8 @@ export default {
 
         axisLabel: {
           show: true,
+          margin: 25,
+
           textStyle: {
             color: '#fff',
             fontSize: '7%'

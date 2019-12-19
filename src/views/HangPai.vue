@@ -1,45 +1,59 @@
 <template>
-    <div class="hangpai--container">
-        <div class="xuanxiangka">
-            <div class="svg--container" @click="showModal">
-                <span>乡村振兴航拍</span>
-                <svg t="1576052696483" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                     xmlns="http://www.w3.org/2000/svg" p-id="1873" width="200" height="200">
-                    <path d="M916.48 124.16l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 143.64672 940.51328 124.16 916.48 124.16z"
-                          p-id="1874" fill="#ffffff"></path>
-                    <path d="M916.48 349.44l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 368.92672 940.51328 349.44 916.48 349.44z"
-                          p-id="1875" fill="#ffffff"></path>
-                    <path d="M916.48 574.72l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 594.20672 940.51328 574.72 916.48 574.72z"
-                          p-id="1876" fill="#ffffff"></path>
-                    <path d="M916.48 812.8l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 832.28672 940.51328 812.8 916.48 812.8z"
-                          p-id="1877" fill="#ffffff"></path>
-                    <path d="M105.80992 167.68m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1878"
-                          fill="#ffffff"></path>
-                    <path d="M105.80992 392.96m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1879"
-                          fill="#ffffff"></path>
-                    <path d="M105.80992 618.24m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1880"
-                          fill="#ffffff"></path>
-                    <path d="M105.80992 856.32m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1881"
-                          fill="#ffffff"></path>
-                </svg>
-            </div>
+  <div class="hangpai--container">
+    <div class="xuanxiangka">
+      <div class="svg--container" @click.capture="showModal">
+        <svg @click.capture="clicked" t="1576722352193" class="icon" viewBox="0 0 1024 1024" version="1.1"
+             xmlns="http://www.w3.org/2000/svg" p-id="3219" width="200" height="200">
+          <path
+            d="M512.546 86.050c0 0-12.561-0.546-24.030 7.1-12.015 8.192-462.029 380.109-462.029 380.109s-32.768 25.668 2.731 70.997 74.82 3.823 74.82 3.823l407.962-359.356 414.515 364.817c0 0 36.591 30.583 70.451-11.469 33.86-42.598-3.277-72.090-3.277-72.090l-121.242-99.942v-175.309h-164.932v39.868l-168.209-139.81c0 0-10.923-9.83-26.761-8.738z"
+            p-id="3220" fill="#ffffff"></path>
+          <path
+            d="M512.546 241.152l-410.146 357.171v300.919l333.141 0.546v-246.306l152.917 1.638v244.122l333.141 0.546v-300.919z"
+            p-id="3221" fill="#ffffff"></path>
+        </svg>
 
-            <div ref="card" class="xuanxiangka--card">
-                <div class="xuanxiangka--image" v-for="(item,i) in villages" :key="i" @click="changeIframe(item.url)">
-                    <div class="img--container">
-                        <img :src="item.img" alt=""/>
-                    </div>
-                    <div class="xuangxiangka--text">
-                        {{ item.name }}
-                    </div>
-                </div>
-            </div>
+        <span>乡村振兴航拍</span>
+        <svg t="1576052696483" class="icon" viewBox="0 0 1024 1024" version="1.1"
+             xmlns="http://www.w3.org/2000/svg" p-id="1873" width="200" height="200">
+          <path
+            d="M916.48 124.16l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 143.64672 940.51328 124.16 916.48 124.16z"
+            p-id="1874" fill="#ffffff"></path>
+          <path
+            d="M916.48 349.44l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 368.92672 940.51328 349.44 916.48 349.44z"
+            p-id="1875" fill="#ffffff"></path>
+          <path
+            d="M916.48 574.72l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 594.20672 940.51328 574.72 916.48 574.72z"
+            p-id="1876" fill="#ffffff"></path>
+          <path
+            d="M916.48 812.8l-583.68 0c-24.03328 0-43.52 19.48672-43.52 43.52 0 24.03328 19.48672 43.52 43.52 43.52l583.68 0c24.03328 0 43.52-19.48672 43.52-43.52C960 832.28672 940.51328 812.8 916.48 812.8z"
+            p-id="1877" fill="#ffffff"></path>
+          <path d="M105.80992 167.68m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1878"
+                fill="#ffffff"></path>
+          <path d="M105.80992 392.96m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1879"
+                fill="#ffffff"></path>
+          <path d="M105.80992 618.24m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1880"
+                fill="#ffffff"></path>
+          <path d="M105.80992 856.32m-43.52 0a4.25 4.25 0 1 0 87.04 0 4.25 4.25 0 1 0-87.04 0Z" p-id="1881"
+                fill="#ffffff"></path>
+        </svg>
+      </div>
 
+      <div ref="card" class="xuanxiangka--card">
+        <div class="xuanxiangka--image" v-for="(item,i) in villages" :key="i" @click="changeIframe(item.url)">
+          <div class="img--container">
+            <img :src="item.img" alt=""/>
+          </div>
+          <div class="xuangxiangka--text">
+            {{ item.name }}
+          </div>
         </div>
-        <!--        <div style="position: absolute;width: 6%;height: 8%;z-index: 9999;background: rgba(3, 19, 44, 1);"></div>-->
-        <iframe class="hangpai--iframe"
-                :src="currentURL"></iframe>
+      </div>
+
     </div>
+    <!--        <div style="position: absolute;width: 6%;height: 8%;z-index: 9999;background: rgba(3, 19, 44, 1);"></div>-->
+    <iframe class="hangpai--iframe"
+            :src="currentURL"></iframe>
+  </div>
 </template>
 
 <script>
@@ -116,6 +130,10 @@ export default {
       this.currentURL = url
       this.showModal()
     },
+    clicked () {
+      console.log('clicked')
+      this.$router.push('/beautiful')
+    },
     showModal () {
       this.showCard = !this.showCard
       if (this.showCard) {
@@ -129,128 +147,128 @@ export default {
 </script>
 
 <style scoped>
-    .hangpai--container, .hangpai--container * {
-        color: white;
-        box-sizing: border-box;
-    }
+  .hangpai--container, .hangpai--container * {
+    color: white;
+    box-sizing: border-box;
+  }
 
-    .hangpai--container {
+  .hangpai--container {
 
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 4.5rem;
-        position: fixed;
-        background: url("../assets/images/bg.png");
-    }
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4.5rem;
+    position: fixed;
+    background: url("../assets/images/bg.png");
+  }
 
-    .hangpai--iframe {
-        position: relative;
-        margin: 0;
-        padding: 0;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-    }
+  .hangpai--iframe {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+  }
 
-    .xuanxiangka {
-        position: absolute;
-        z-index: 10000;
-        top: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-    }
+  .xuanxiangka {
+    position: absolute;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .svg--container {
-        flex-shrink: 1;
-        flex-grow: 0;
-        width: 10vw;
-        height: 8vh;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        box-shadow: 2px 2px 10px black;
-        border-bottom-right-radius: 0.8vw;
-        background: #1b2a49;
-    }
+  .svg--container {
+    flex-shrink: 1;
+    flex-grow: 0;
+    width: 10vw;
+    height: 3vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 2px 2px 10px black;
+    border-bottom-right-radius: 0.8vw;
+    background: #1b2a49;
+  }
 
-    .svg--container span {
-        font-size: 0.8vw;
-    }
+  .svg--container span {
+    font-size: 0.8vw;
+  }
 
-    .svg--container :hover {
-        cursor: pointer;
-    }
+  .svg--container :hover {
+    cursor: pointer;
+  }
 
-    .svg--container svg {
-        width: 1vw;
-    }
+  .svg--container svg {
+    width: 1vw;
+  }
 
-    .xuanxiangka--card {
-        position: relative;
-        margin-top: 1vw;
-        margin-left: 1vw;
-        width: 15vw;
-        height: 15vw;
-        padding: 0.4vw;
-        padding-bottom: 0;
-        background: rgba(3, 19, 44, 0.6);
-        border-radius: 0.3vw;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        transition: transform 0.4s ease;
-        transform-origin: top;
-        transform: scale(0, 0);
-    }
+  .xuanxiangka--card {
+    position: relative;
+    margin-top: 1vw;
+    margin-left: 1vw;
+    width: 15vw;
+    height: 15vw;
+    padding: 0.4vw;
+    padding-bottom: 0;
+    background: rgba(3, 19, 44, 0.6);
+    border-radius: 0.3vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    transition: transform 0.4s ease;
+    transform-origin: top;
+    transform: scale(0, 0);
+  }
 
-    .xuanxiangka--image {
-        box-sizing: border-box;
-        flex: 1 1 30%;
-        padding: 20px;
+  .xuanxiangka--image {
+    box-sizing: border-box;
+    flex: 1 1 30%;
+    padding: 20px;
 
-        max-height: 30%;
-        position: relative;
-        overflow: hidden;
-    }
+    max-height: 30%;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .xuanxiangka--image:hover {
-        cursor: pointer;
-    }
+  .xuanxiangka--image:hover {
+    cursor: pointer;
+  }
 
-    .xuangxiangka--text {
-        position: absolute;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        height: 25%;
-        font-size: 0.5vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: rgba(3, 19, 44, 0.5);
-    }
+  .xuangxiangka--text {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: 25%;
+    font-size: 0.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(3, 19, 44, 0.5);
+  }
 
-    .img--container img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        max-height: 100%;
-        transform: translate(-50%, -50%);
-        opacity: 0.7;
+  .img--container img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-height: 100%;
+    transform: translate(-50%, -50%);
+    opacity: 0.7;
 
-    }
+  }
 
-    .img--container {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        overflow: hidden;
+  .img--container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    overflow: hidden;
 
-    }
+  }
 </style>

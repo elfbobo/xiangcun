@@ -24,7 +24,7 @@
         </div>
         <div class="shenongqu--right">
             <tuijing-bar ref="bar1" :title="`${title1}重点任务推进情况`"></tuijing-bar>
-            <tuijing-bar ref="bar2" :title="`${title2}11月重点任务推进情况`"></tuijing-bar>
+            <tuijing-bar ref="bar2" :title="`${title2}重点任务推进情况`"></tuijing-bar>
         </div>
     </div>
 </template>
