@@ -965,7 +965,7 @@ export default {
               }
 
             },
-            data: villageExample.filter((item, index) => index != num)
+            data: villageExample.filter((item, index) => index !== num)
           },
           {
             name: '当前村',
@@ -1013,6 +1013,11 @@ export default {
         ]
       }
       this.mapChartEL.setOption(option)
+      this.mapChartEL.on('legendselectchanged', (params) => {
+        if (!params.selected['第一批9个']) {
+          this.$router.push('/hangpai')
+        }
+      })
     }
   }
 }

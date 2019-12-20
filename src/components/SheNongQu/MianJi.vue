@@ -61,7 +61,7 @@ export default {
     options: {
       grid: {
         left: '10%',
-        right: '2%',
+        right: '5%',
         top: '10%'
       },
       xAxis: {
@@ -80,7 +80,7 @@ export default {
 
           textStyle: {
             color: '#fff',
-            fontSize: '7%'
+            fontSize: '9%'
           },
           formatter: function (params) {
             let res = ''

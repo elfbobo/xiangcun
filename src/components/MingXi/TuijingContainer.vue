@@ -51,7 +51,7 @@ export default {
       return `${this.currentYear}年1月至${this.currentMonth}月`
     },
     title2 () {
-      return `${this.currentMonth}月`
+      return `${this.currentYear}年${this.currentMonth}月`
     }
 
   },

@@ -30,7 +30,7 @@ export default {
       return `${this.currentYear}年1月至${this.currentMonth}月77项相关委办局重点任务推进情况`
     },
     title2 () {
-      return `${this.currentMonth}月77项相关委办局重点任务推进情况`
+      return `${this.currentYear}年${this.currentMonth}月77项相关委办局重点任务推进情况`
     }
 
   },
@@ -44,7 +44,7 @@ export default {
         if (status === 200) {
           if (!this.$refs[refName]) return
           const processed = data.reduce((prev, next) => {
-              const v = parseFloat(next.p)
+            const v = parseFloat(next.p)
             return prev.concat({
               name: next.subcompanyname,
               value: v || 0

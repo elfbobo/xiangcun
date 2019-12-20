@@ -44,7 +44,7 @@ export default {
       return `${this.currentYear}年1月至${this.currentMonth}月77项重点任务推进情况`
     },
     title2 () {
-      return `${this.currentMonth}月77项重点任务推进情况`
+      return `${this.currentYear}年${this.currentMonth}月77项重点任务推进情况`
     },
     districts () {
       return this.districtNames.reduce((prev, next) => {
