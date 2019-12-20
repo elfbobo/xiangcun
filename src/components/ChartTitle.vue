@@ -7,19 +7,31 @@
             {{ subtitle }}
         </span>
         <div class="special-actions">
-            <slot name="actions">
-            </slot>
+
         </div>
     </div>
 </template>
 
 <script>
+import ElSelect from './select/elSelect'
+import ElOption from './select/elOption'
 export default {
   name: 'ChartTitle',
+  components: { },
   props: {
     subtitle: {
       type: String,
       default: ''
+    }
+  },
+  data: () => ({
+    yearCheck: 2019,
+    monthCheck: 1,
+    yearRange: [2016, 2017, 2018, 2019]
+  }),
+  methods: {
+    yearSelectChange () {
+
     }
   }
 }
@@ -37,7 +49,7 @@ export default {
         box-sizing: border-box;
     }
     .special-actions {
-        margin-left: auto;
+        margin-right: auto;
     }
     .special-title {
         color: white;

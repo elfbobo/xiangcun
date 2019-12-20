@@ -18,8 +18,8 @@
                 ></huan>
             </div>
             <div class="shenongqu--mianji">
-                <mian-ji ref="mianji1" :title="`${title1}涉农区重点任务推进排名`"></mian-ji>
-                <mian-ji ref="mianji2" :title="`${title2}各涉农区重点任务推进排名`" start-color="rgba(251,185,25,1)"></mian-ji>
+                <mian-ji ref="mianji1" second-color="rgba(251,185,25,1)" :title="`${title1}涉农区重点任务推进排名`"></mian-ji>
+                <mian-ji ref="mianji2" :title="`${title2}各涉农区重点任务推进排名`" start-color="rgba(251,185,25,1)" second-color="rgba(4,244,251,1)"></mian-ji>
             </div>
         </div>
         <div class="shenongqu--right">

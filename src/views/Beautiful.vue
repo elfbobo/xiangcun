@@ -1,169 +1,173 @@
 <template>
-    <div class="beautiful-wrap">
-        <div class="chart-main clearfix">
-            <div class="chart-left">
-                <div class="chart-left-title">美丽乡村、乡村振兴示范村奖励 <div class="inner-year">(2019)</div></div>
-                <div class="reward-chart">
-                    <h4><label>合计</label>4.6<span>亿元</span></h4>
-                    <div class="chart-unit">(千万元)</div>
-                    <bar-chart-output ref="rewardCharts" :classNameP='rewardCss'></bar-chart-output>
-                </div>
-                <div class="chart-left-title">
-                    市政基础设施
-                </div>
-                <div class="basic-facility">
-                    <div class="year-plane event-title">
-                        <ul>
-                            <li><span class="year-plane-label">新改建道路</span><span class="year-plane-data"><em>60</em>公里</span></li>
-                            <li><span class="year-plane-label">提升改建桥梁</span><span class="year-plane-data"><em>79</em>座</span></li>
-                            <li><span class="year-plane-label">整理架空线</span><span class="year-plane-data"><em>50</em>公里</span></li>
-                        </ul>
-                    </div>
-                    <div class="public-service-line">
-                        <span class="basic-icon"></span>
-                        <div class="public-service-info">
-                            <label for="shenghuolaji">新改建生活垃圾处理设施</label>
-                            <div id="shenghuolaji" class="public-service-total"><span><em>48</em>座</span></div>
-                        </div>
-                    </div>
-                    <div class="basic-sewage">
-                        <div class="sewage-label">
-                            生活污水处理率
-                        </div>
-                        <div class="basic-sewage-chart">
-                            <progress-chart ref="basicSewage" :classNameP='basicRange'></progress-chart>
-                        </div>
-                    </div>
-                </div>
-                <div class="chart-left-title">
-                    农村相对集中居住
-                </div>
-                <div class="live-centralize">
-                    <div class="live-centralize-left live-centralize-line">
-                        <label for="shenonghushu">涉及农户数</label>
-                        <div id="shenonghushu" class="live-centralize-count"><em>270</em>户</div>
-                    </div>
-                    <div class="live-centralize-right live-centralize-line">
-                        <label for="juzhudianmianji">居住点面积</label>
-                        <div id="juzhudianmianji" class="live-centralize-count"><em>17</em>公顷</div>
-                    </div>
-                    <div class="centralize-center">
-                        <div class="center-circle">
-                            <span class="center-circle-icon"><img src="@/assets/images/icon-country.png" alt=""></span>
-                            <div class="live-centralize-count"><em>3</em>个</div>
-                        </div>
-                        <div class="center-label">建成平移集中居住点</div>
-                    </div>
-                </div>
-            </div>
-            <div class="chart-middle">
-                <div class="village-show">
-                    <div class="village-map-data clearfix">
-                        <div class="village-box-data">
-                            <div class="village-title">
-                                <div class="select-map clearfix">
-                                    <el-select v-model='rangeCheck' ref='selectCheck'  @change='selectChange'>
-                                        <el-option  v-for="item in elOptionData" :label='item.label' :value='item.value' :key='item.value'></el-option>
-                                    </el-select>
-                                </div>
-                                <div class="view-photo" @click="viewPhoto"><img src="@/assets/images/view-img.png" alt=""></div>
-                            </div>
-                            <div class="map-chart-tab clearfix">
-                                <div class="map-chart-title">
-                                    <div class="map-chart-line">
-                                        <ul>
-                                            <li v-for="(item,index) in currentMapData.mapTableData" :key=index :class="{active:index==0}">
-                                                <span class="chart-v-icon"><img :src="require('@/assets/images/b-c-icon'+(index+1)+'.png')" alt=""></span>
-                                                <div class="chart-v-data">
-                                                    <div class="chart-v-no">{{item.nr}}<i class="chart-v-unit">{{item.unit}}</i></div>
-                                                    <div class="chart-v-label">{{item.xm}}</div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="map-chart" ref="mapChart"></div>
-                            </div>
-                        </div>
-                        <div class="village-altered">
-                            <div class="village-alltered-list swiper-village-container">
-                                <ul class="swiper-wrapper">
-                                    <li class="swiper-slide"><img :src="flyimg" alt=""></li>
-                                    <li class="swiper-slide"><img :src="mapRangeSrc" alt=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="chart-right">
-                <div class="chart-left-title">生态环境建设</div>
-                <div class="construction-list clearfix">
-                    <div class="construction-left construction-line">
-                        <div class="construction-icon"><img src="@/assets/images/river.png" alt=""></div>
-                        <div class="construction-info">
-                            <label for="hedaozhengzhi">河道整治</label>
-                            <div id="hedaozhengzhi" class="live-centralize-count"><em>62</em>公里</div>
-                        </div>
-                    </div>
-                    <div class="construction-right construction-line">
-                        <div class="construction-info">
-                            <label for="lvhuazaolin">绿化造林</label>
-                            <div id="lvhuazaolin" class="live-centralize-count"><em>21</em>万平方米</div>
-                        </div>
-                        <div class="construction-icon construction-right-icon"><img src="@/assets/images/forest.png" alt=""></div>
-                    </div>
-                </div>
-                <div class="chart-left-title">新产业新业态建设</div>
-                <div class="new-construction-list">
-                    <ul>
-                        <li>
-                            <label for="xiuxiannongye">建成休闲农业乡村旅游景点</label>
-                            <span id="xiuxiannongye">28 <i>个</i></span>
-                        </li>
-                        <li>
-                            <label for="shichangzhuti">引入市场主体</label>
-                            <span id="shichangzhuti">60 <i>家</i></span>
-                        </li>
-                        <li>
-                            <label for="panhuo">盘活农宅建成餐饮、民宿</label>
-                            <span id="panhuo">73 <i>个</i></span>
-                        </li>
-                        <li>
-                            <label for="lvyou">建成旅游服务中心</label>
-                            <span id="lvyou">6150 <i>平方米</i></span>
-                        </li>
-                        <li>
-                            <label for="qiyezongbu">盘活闲置用房建成文化创意、企业总部等</label>
-                            <span id="qiyezongbu">71 <i>个</i></span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="chart-left-title">
-                    公共服务设施
-                </div>
-                <div class="public-service">
-                    <div class="public-service-line p-s-item clearfix">
-                        <span class="public-service-icon"></span>
-                        <div class="public-service-info">
-                            <label for="gongong">新改建村公共服务用房</label>
-                            <div id="gongong" class="public-service-total"><span><em>3</em>万平方米</span><span><em>67</em>个</span></div>
-                        </div>
-                    </div>
-                    <div class="public-service-chart clearfix">
-                        <div class="public-service-left">
-                            <guage-chart  ref="publicServiceLeft"></guage-chart>
-                        </div>
-                        <div class="public-service-right">
-                            <guage-chart  ref="publicServiceRight"></guage-chart>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="beautiful-wrap">
+    <div class="chart-main clearfix">
+      <div class="chart-left">
+        <div class="chart-left-title">美丽乡村、乡村振兴示范村奖励
+          <div class="inner-year">(2019)</div>
         </div>
-        <el-dialog-guide ref="guideDialog"></el-dialog-guide>
-        <el-dialog-view ref="viewDialog"></el-dialog-view>
+        <div class="reward-chart">
+          <h4><label>合计</label>4.6<span>亿元</span></h4>
+          <div class="chart-unit">(千万元)</div>
+          <bar-chart-output ref="rewardCharts" :classNameP='rewardCss'></bar-chart-output>
+        </div>
+        <div class="chart-left-title">
+          市政基础设施
+        </div>
+        <div class="basic-facility">
+          <div class="year-plane event-title">
+            <ul>
+              <li><span class="year-plane-label">新改建道路</span><span class="year-plane-data"><em>60</em>公里</span></li>
+              <li><span class="year-plane-label">提升改建桥梁</span><span class="year-plane-data"><em>79</em>座</span></li>
+              <li><span class="year-plane-label">整理架空线</span><span class="year-plane-data"><em>50</em>公里</span></li>
+            </ul>
+          </div>
+          <div class="public-service-line">
+            <span class="basic-icon"></span>
+            <div class="public-service-info">
+              <label for="shenghuolaji">新改建生活垃圾处理设施</label>
+              <div id="shenghuolaji" class="public-service-total"><span><em>48</em>座</span></div>
+            </div>
+          </div>
+          <div class="basic-sewage">
+            <div class="sewage-label">
+              生活污水处理率
+            </div>
+            <div class="basic-sewage-chart">
+              <progress-chart ref="basicSewage" :classNameP='basicRange'></progress-chart>
+            </div>
+          </div>
+        </div>
+        <div class="chart-left-title">
+          农村相对集中居住
+        </div>
+        <div class="live-centralize">
+          <div class="live-centralize-left live-centralize-line">
+            <label for="shenonghushu">涉及农户数</label>
+            <div id="shenonghushu" class="live-centralize-count"><em>270</em>户</div>
+          </div>
+          <div class="live-centralize-right live-centralize-line">
+            <label for="juzhudianmianji">居住点面积</label>
+            <div id="juzhudianmianji" class="live-centralize-count"><em>17</em>公顷</div>
+          </div>
+          <div class="centralize-center">
+            <div class="center-circle">
+              <span class="center-circle-icon"><img src="@/assets/images/icon-country.png" alt=""></span>
+              <div class="live-centralize-count"><em>3</em>个</div>
+            </div>
+            <div class="center-label">建成平移集中居住点</div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-middle">
+        <div class="village-show">
+          <div class="village-map-data clearfix">
+            <div class="village-box-data">
+              <div class="village-title">
+                <div class="select-map clearfix">
+                  <el-select v-model='rangeCheck' ref='selectCheck' @change='selectChange'>
+                    <el-option v-for="item in elOptionData" :label='item.label' :value='item.value'
+                               :key='item.value'></el-option>
+                  </el-select>
+                </div>
+                <div class="view-photo" @click="viewPhoto"><img src="@/assets/images/view-img.png" alt=""></div>
+              </div>
+              <div class="map-chart-tab clearfix">
+                <div class="map-chart-title">
+                  <div class="map-chart-line">
+                    <ul>
+                      <li v-for="(item,index) in currentMapData.mapTableData" :key=index :class="{active:index==0}">
+                        <span class="chart-v-icon"><img :src="require('@/assets/images/b-c-icon'+(index+1)+'.png')"
+                                                        alt=""></span>
+                        <div class="chart-v-data">
+                          <div class="chart-v-no">{{item.nr}}<i class="chart-v-unit">{{item.unit}}</i></div>
+                          <div class="chart-v-label">{{item.xm}}</div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="map-chart" ref="mapChart"></div>
+              </div>
+            </div>
+            <div class="village-altered">
+              <div class="village-alltered-list swiper-village-container">
+                <ul class="swiper-wrapper">
+                  <li class="swiper-slide"><img :src="flyimg" alt=""></li>
+                  <li class="swiper-slide"><img :src="mapRangeSrc" alt=""></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-right">
+        <div class="chart-left-title">生态环境建设</div>
+        <div class="construction-list clearfix">
+          <div class="construction-left construction-line">
+            <div class="construction-icon"><img src="@/assets/images/river.png" alt=""></div>
+            <div class="construction-info">
+              <label for="hedaozhengzhi">河道整治</label>
+              <div id="hedaozhengzhi" class="live-centralize-count"><em>62</em>公里</div>
+            </div>
+          </div>
+          <div class="construction-right construction-line">
+            <div class="construction-info">
+              <label for="lvhuazaolin">绿化造林</label>
+              <div id="lvhuazaolin" class="live-centralize-count"><em>21</em>万平方米</div>
+            </div>
+            <div class="construction-icon construction-right-icon"><img src="@/assets/images/forest.png" alt=""></div>
+          </div>
+        </div>
+        <div class="chart-left-title">新产业新业态建设</div>
+        <div class="new-construction-list">
+          <ul>
+            <li>
+              <label for="xiuxiannongye">建成休闲农业乡村旅游景点</label>
+              <span id="xiuxiannongye">28 <i>个</i></span>
+            </li>
+            <li>
+              <label for="shichangzhuti">引入市场主体</label>
+              <span id="shichangzhuti">60 <i>家</i></span>
+            </li>
+            <li>
+              <label for="panhuo">盘活农宅建成餐饮、民宿</label>
+              <span id="panhuo">73 <i>个</i></span>
+            </li>
+            <li>
+              <label for="lvyou">建成旅游服务中心</label>
+              <span id="lvyou">6150 <i>平方米</i></span>
+            </li>
+            <li>
+              <label for="qiyezongbu">盘活闲置用房建成文化创意、企业总部等</label>
+              <span id="qiyezongbu">71 <i>个</i></span>
+            </li>
+          </ul>
+        </div>
+        <div class="chart-left-title">
+          公共服务设施
+        </div>
+        <div class="public-service">
+          <div class="public-service-line p-s-item clearfix">
+            <span class="public-service-icon"></span>
+            <div class="public-service-info">
+              <label for="gongong">新改建村公共服务用房</label>
+              <div id="gongong" class="public-service-total"><span><em>3</em>万平方米</span><span><em>67</em>个</span></div>
+            </div>
+          </div>
+          <div class="public-service-chart clearfix">
+            <div class="public-service-left">
+              <guage-chart ref="publicServiceLeft"></guage-chart>
+            </div>
+            <div class="public-service-right">
+              <guage-chart ref="publicServiceRight"></guage-chart>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <el-dialog-guide ref="guideDialog"></el-dialog-guide>
+    <el-dialog-view ref="viewDialog"></el-dialog-view>
+  </div>
 </template>
 
 <script>
@@ -175,6 +179,7 @@ import ElSelect from '@/components/select/elSelect'
 import ElOption from '@/components/select/elOption'
 import BarChartOutput from '@/components/barCharts/barChart'
 import ProgressChart from '@/components/progressCharts/progressChart'
+
 require('echarts/map/js/province/shanghai.js')
 export default {
   data () {

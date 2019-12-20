@@ -2,10 +2,8 @@
     <div class="tuijing--container">
         <div class="tuijing--header">
             <span class="tuijing--select--span"></span>
-            <span>{{ selectedDistrict.name }}</span>
-            <span>——</span>
             <span class="tuijing--title">
-                {{ title }}77项相关委办局重点任务推进情况
+                {{ title }}77项所有重点任务推进情况
             </span>
         </div>
 
@@ -90,24 +88,27 @@ export default {
         splitLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         axisLabel: {
           show: true,
           textStyle: {
             color: '#fff',
-            fontSize: '70%'
+            fontSize: '90%'
           }
         },
         axisTick: {
+          show: false,
+
           lineStyle: {
             color: 'rgba(4,244,251,0.3)'
           }
         },
         axisLine: {
+          show: false,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
 
         },
@@ -119,7 +120,7 @@ export default {
         type: 'value',
         splitLine: {
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         axisLabel: {
@@ -131,13 +132,14 @@ export default {
           formatter: '{value} %'
         },
         axisTick: {
+          show: false,
           lineStyle: {
             color: 'rgba(4,244,251,0.3)'
           }
         },
         axisLine: {
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         }
       },

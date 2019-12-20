@@ -153,7 +153,11 @@ export default {
     })
   },
   methods: {
+    viewDistrict () {
+      this.$emit('viewDistrict')
+    },
     linkTo (url) {
+      if (this.$route.path.includes(url)) return
       this.$router.push(url)
     },
     getTaskChart () {

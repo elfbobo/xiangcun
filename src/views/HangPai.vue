@@ -39,6 +39,17 @@
       </div>
 
       <div ref="card" class="xuanxiangka--card">
+        <div class="xuanxiangka--tab">
+          <span
+            class="xuanxiangka--tab-content"
+            :class="{'xuanxiangka--tab-content--active': selectedType === t }"
+            v-for="(t, ti) in types"
+            :key="'type'+ti"
+            @click="onSelectType(ti)"
+          >
+            {{ t }}
+          </span>
+        </div>
         <div class="xuanxiangka--image" v-for="(item,i) in villages" :key="i" @click="changeIframe(item.url)">
           <div class="img--container">
             <img :src="item.img" alt=""/>
@@ -72,11 +83,11 @@ import huangqiao from '../assets/images/shijing/黄桥村.jpg'
 export default {
   name: 'HangPai',
   data () {
-    const villages = [
+    const first = [
       {
         name: '吴房村',
         img: wufang,
-        url: ' https://720yun.com/t/zzlraaj55rim4gmwfr?from=singlemessage&isappinstalled=0&pano_id=rerl7tl98LIPQFrk'
+        url: 'https://720yun.com/t/zzlraaj55rim4gmwfr?from=singlemessage&isappinstalled=0&pano_id=rerl7tl98LIPQFrk'
       },
       {
         name: '塘湾村',
@@ -117,23 +128,190 @@ export default {
         url: ''
       }
     ]
-
+    const second = [
+      {
+        name: '同心村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '赵家村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '连民村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '界浜村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '长达村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '大河村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '公平村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '联一村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '海星村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '天平村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '聚源桥村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '新强村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '浦秀村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '杨王村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '沈陆村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '关港村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '南杨村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '东夏村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '新义村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '待泾村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '永乐村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '和平村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '山塘村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '张马村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '东庄村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '徐姚村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '北双村',
+        img: wufang,
+        url: ''
+      },
+      {
+        name: '新安村',
+        img: wufang,
+        url: ''
+      }
+    ]
+    const third = [
+      {
+        name: '红旗村',
+        img: wufang,
+        url: ''
+      }
+    ]
+    const types = ['第一批', '第二批', '其他']
     return {
       showCard: false,
-      currentURL: villages[0].url,
-      villages
+      currentURL: first[0].url,
+      villages: first,
+      first,
+      second,
+      third,
+      types: types,
+      selectedType: types[0]
     }
   },
   mounted () {
   },
   methods: {
+    onSelectType (idx = 0) {
+      this.selectedType = this.types[idx]
+      if (idx === 1) {
+        this.villages = this.second
+        this.$refs.card.style.width = '45vw'
+      } else {
+        if (idx === 0) {
+          this.villages = this.first
+        } else {
+          this.villages = this.third
+        }
+        this.$refs.card.style.width = '14vw'
+      }
+    },
     changeIframe (url) {
       if (url.length === 0) return
       this.currentURL = url
       this.showModal()
     },
     clicked () {
-      console.log('clicked')
       this.$router.push('/beautiful')
     },
     showModal () {
@@ -148,7 +326,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .hangpai--container, .hangpai--container * {
     color: white;
     box-sizing: border-box;
@@ -213,26 +391,34 @@ export default {
     position: relative;
     margin-top: 1vw;
     margin-left: 1vw;
-    width: 15vw;
-    height: 15vw;
+    width: 14vw;
+    height: 16vw;
     padding: 0.4vw;
     padding-bottom: 0;
     background: rgba(3, 19, 44, 0.6);
     border-radius: 0.3vw;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    align-content: flex-start;
+
+    justify-content: flex-start;
     transition: transform 0.4s ease;
     transform-origin: top;
     transform: scale(0, 0);
   }
 
+  @imgWidth: .7rem;
+
   .xuanxiangka--image {
     box-sizing: border-box;
-    flex: 1 1 30%;
+    flex: 1 1 @imgWidth;
     padding: 20px;
-
-    max-height: 30%;
+    width: @imgWidth;
+    min-width: @imgWidth;
+    max-width: @imgWidth;
+    height: @imgWidth;
+    min-height: @imgWidth;
+    max-height: @imgWidth;
     position: relative;
     overflow: hidden;
   }
@@ -273,4 +459,37 @@ export default {
     overflow: hidden;
 
   }
+
+  .xuanxiangka--tab {
+    width: 100%;
+    height: .3rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .xuanxiangka--tab-content {
+    box-sizing: content-box;
+    font-size: .1rem;
+    text-align: center;
+    vertical-align: middle;
+    margin: .05rem 0.025rem;
+    margin-top: 0;
+    padding: 0.05rem .06rem;
+    color: rgba(255,255,255,0.4);
+
+    &:last-child::after {
+      content: '';
+    }
+
+    &--active {
+      color: white;
+      padding-top: calc(0.05rem - 1px);
+      border-bottom: 1px solid #04f4fb;
+    }
+     &:hover {
+       cursor: pointer;
+     }
+  }
+
 </style>

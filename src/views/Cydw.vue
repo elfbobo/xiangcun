@@ -1,10 +1,10 @@
 <template>
     <div class="router--container column">
         <div class="router--col column">
-            <mian-ji ref="line1" smooth :line-width="0" left="3%" :title="title1"></mian-ji>
+            <mian-ji change-line ref="line1" smooth :line-width="0" left="3%" :title="title1"></mian-ji>
         </div>
         <div class="router--col column">
-            <mian-ji ref="line2" smooth :line-width="0" left="3%" :title="title2"
+            <mian-ji change-line ref="line2" smooth :line-width="0" left="3%" :title="title2"
                      start-color="rgba(251,185,25,1)"></mian-ji>
         </div>
     </div>

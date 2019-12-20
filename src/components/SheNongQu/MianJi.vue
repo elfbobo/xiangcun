@@ -35,6 +35,10 @@ export default {
       type: String,
       default: 'rgba(4,244,251,1)'
     },
+    secondColor: {
+      type: [Boolean, String],
+      default: false
+    },
     target: {
       type: [Boolean, Number],
       default: false
@@ -55,6 +59,10 @@ export default {
     left: {
       type: String,
       default: '10%'
+    },
+    changeLine: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -62,14 +70,15 @@ export default {
       grid: {
         left: '10%',
         right: '5%',
-        top: '10%'
+        top: '10%',
+        bottom: '20%'
       },
       xAxis: {
         type: 'category',
         splitLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         boundaryGap: false,
@@ -77,10 +86,10 @@ export default {
         axisLabel: {
           show: true,
           margin: 25,
-
           textStyle: {
             color: '#fff',
-            fontSize: '9%'
+            fontSize: '9%',
+            lineHeight: 30
           },
           formatter: function (params) {
             let res = ''
@@ -100,8 +109,9 @@ export default {
           }
         },
         axisLine: {
+          show: false,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         data: ['宝山', '浦东', '嘉定', '崇明', '奉贤', '松江', '青浦', '闵行', '金山']
@@ -113,7 +123,7 @@ export default {
         splitLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         axisLabel: {
@@ -132,8 +142,9 @@ export default {
           }
         },
         axisLine: {
+          show: false,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         }
 
@@ -170,17 +181,21 @@ export default {
         emphasis: {
           itemStyle: {
             color: '#ffffff',
-            opacity: 100
+            opacity: 100,
+            borderWidth: 5
           }
         }
       }]
     }
   }),
   mounted () {
+    if (this.changeLine) this.options.grid.bottom = '30%'
     this.options.series[0].areaStyle.color = this.setGradientColor(this.startColor, 'rgba(0,0,0,0)')
     this.options.series[0].itemStyle.color = this.startColor
     this.options.series[0].lineStyle.color = this.startColor
-    let temp = this.startColor.split(',')
+
+    let color = this.startColor
+    let temp = color.split(',')
     temp[temp.length - 1] = '0.25)'
     this.options.tooltip.backgroundColor = temp.join(',')
     this.setChartStyle()
@@ -222,7 +237,7 @@ export default {
 
           lineStyle: {
             type: 'dotted',
-            color: this.startColor
+            color: this.secondColor || this.startColor
           },
           data: [{
             value: target,
@@ -233,7 +248,7 @@ export default {
           label: {
             show: true,
             fontSize: '20px',
-            color: this.startColor,
+            color: this.secondColor || this.startColor,
             formatter: '{c} %',
             position: 'bottom'
           }

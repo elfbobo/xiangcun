@@ -48,7 +48,7 @@ export default {
         splitLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         axisLabel: {
@@ -62,12 +62,12 @@ export default {
           show: false,
 
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         axisLine: {
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
 
@@ -79,7 +79,7 @@ export default {
         splitLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         axisLabel: {
@@ -88,12 +88,13 @@ export default {
         axisTick: {
           show: false,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         },
         axisLine: {
+          show: false,
           lineStyle: {
-            color: 'rgba(4,244,251,0.3)'
+            color: 'rgba(23,76,110,0.2)'
           }
         }
       },
@@ -152,7 +153,7 @@ export default {
           }
         },
         itemStyle: {
-          color: '#fbb919'
+          color: '#ff5959'
           // barBorderRadius: [0, 20, 20, 0]
         },
         data: []

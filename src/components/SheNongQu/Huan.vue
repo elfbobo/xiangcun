@@ -23,7 +23,7 @@
                         <td>{{ processing }}<span>项</span></td>
                     </tr>
                     <tr v-if="delayed">
-                        <td><span style="background: #fbb919"></span>滞后</td>
+                        <td><span style="background: #ff5959"></span>滞后</td>
                         <td>{{ percentage.delayed }}<span>%</span></td>
                         <td>{{ delayed }}<span>项</span></td>
                     </tr>
@@ -110,7 +110,7 @@ export default {
     setChart ({ finished, processing, delayed }) {
       this.options.series[0].data = []
       if (delayed) {
-        this.options.series[0].data.push(this.setPieDetail('滞后', delayed, '#fbb919'))
+        this.options.series[0].data.push(this.setPieDetail('滞后', delayed, '#ff5959'))
       }
 
       if (finished) {
