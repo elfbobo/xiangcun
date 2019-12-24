@@ -27,7 +27,7 @@
         </div>
         <div class="shenongqu--right">
             <tuijing-bar jiezhi ref="bar1" :title="`重点任务推进情况`"></tuijing-bar>
-            <tuijing-bar ref="bar2" :title="`重点任务推进情况`"></tuijing-bar>
+            <tuijing-bar ref="bar2" jiezhi no-select :title="`${currentMonth}月重点任务推进情况`"></tuijing-bar>
         </div>
     </div>
 </template>

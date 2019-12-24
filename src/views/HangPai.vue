@@ -274,7 +274,7 @@ export default {
       {
         name: '红旗村',
         img: wufang,
-        url: ''
+        url: 'https://720yun.com/t/04vkue29zf9?scene_id=38213532'
       }
     ]
     const types = ['第一批', '第二批', '其他']

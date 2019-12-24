@@ -1,6 +1,6 @@
 <template>
     <div class="bar--container">
-        <chart-title subtitle="（按滞后任务数排名）" :jiezhi="!jiezhi">{{ title }}</chart-title>
+        <chart-title subtitle="（按滞后任务数排名）" :no-select="noSelect" :jiezhi="!jiezhi">{{ title }}</chart-title>
         <div style="flex: 1 1 auto;position: relative;">
             <chart-mixins ref="bar" :options="options"></chart-mixins>
         </div>
@@ -26,7 +26,11 @@ export default {
     jiezhi: {
       type: Boolean,
       default: false
-    }
+    },
+      noSelect: {
+        type: Boolean,
+          default: false
+      }
   },
   data: () => ({
     options: {

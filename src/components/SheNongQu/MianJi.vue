@@ -211,6 +211,9 @@ export default {
           }
         }
 
+      },{
+          type: 'line',
+          data: []
       }]
     }
   }),
@@ -259,7 +262,7 @@ export default {
       this.options.series[0].data = values
       this.options.xAxis.data = names
       if (target) {
-        this.options.series.push({
+        this.options.series[1] = {
           type: 'line',
           connectNulls: true,
           itemStyle: {
@@ -283,7 +286,7 @@ export default {
             formatter: '{c} %',
             position: 'bottom'
           }
-        })
+        }
       }
       this.$refs.mianji.setChart()
     },

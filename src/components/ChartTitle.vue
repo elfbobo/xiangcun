@@ -1,7 +1,7 @@
 <template>
     <div class="special-title--container">
         <span class="special-title">
-            {{ currentYear }}年{{ !jiezhi ? `1月至${currentMonth}月` : '' }}<date-select v-if="jiezhi" :overall="jiezhi" @onChosenValue="onChosenMonth"></date-select>
+            {{ currentYear }}年{{ !jiezhi && !noSelect ? `1月至${currentMonth}月` : '' }}<date-select v-if="!noSelect && jiezhi" :overall="jiezhi" @onChosenValue="onChosenMonth"></date-select>
             <slot></slot>
         </span>
         <span class="special-subtitle">
@@ -29,7 +29,11 @@ export default {
     jiezhi: {
       type: Boolean,
       default: false
-    }
+    },
+      noSelect: {
+        type: Boolean,
+          default: false
+      }
   },
   data: () => ({
     yearCheck: 2019,
