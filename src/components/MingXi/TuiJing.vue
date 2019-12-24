@@ -3,7 +3,9 @@
         <div class="tuijing--header">
             <span class="tuijing--select--span"></span>
             <span class="tuijing--title">
-                {{ title }}77项所有重点任务推进情况
+                {{ title }}
+              <date-select v-if="this.month !== 'overall'" :overall="this.month !== 'overall'" @onChosenValue="onChooseMonth"></date-select>
+              77项所有重点任务推进情况
             </span>
         </div>
 
@@ -21,8 +23,12 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/visualMap'
 import { mapGetters } from 'vuex'
+import ElSelect from '../select/elSelect'
+import ElOption from '../select/elOption'
+import DateSelect from '../DateSelect'
 export default {
   name: 'TuiJing',
+  components: { DateSelect },
   props: {
     title: {
       type: String,
@@ -58,7 +64,7 @@ export default {
         if (old === newVal) {
           return
         }
-        this.setOptionsData(newVal, this.month)
+        this.setOptionsData(newVal, this.month, this.cm)
       },
       deep: true
     }
@@ -66,6 +72,7 @@ export default {
   data: () => ({
     chart: undefined,
     itemsNumber: 77,
+    cm: 0,
     options: {
       grid: {
         left: '2.5%',
@@ -179,7 +186,9 @@ export default {
     this.options.visualMap.inRange.color = [this.startColor, this.endColor]
   },
   mounted () {
-    this.setOptionsData(this.selectedDistrict, this.month)
+    this.$nextTick(() => {
+      this.setOptionsData(this.selectedDistrict, this.month, this.currentMonth)
+    })
   },
   computed: {
     ...mapGetters({
@@ -189,6 +198,17 @@ export default {
     })
   },
   methods: {
+    endOfMonth (m) {
+      switch (m) {
+        case 4:case 6:case 9:case 11: return 30
+        case 2: return 28
+        default: return 31
+      }
+    },
+    onChooseMonth (month) {
+      this.cm = month
+      this.setOptionsData(this.selectedDistrict, this.month, month)
+    },
     setChart () {
       if (!this.chart) {
         this.chart = echarts.init(this.$refs.tuijing, null, { renderer: 'canvas' })
@@ -201,18 +221,18 @@ export default {
         value: percent
       }
     },
-    setOptionsData (obj = {}, month = '') {
+    setOptionsData (obj = {}, month = '', monthValue = 1) {
       if (!month) return
       let params = {}
       if (month === 'overall') {
         params = {
           begin: `${this.currentYear}-01-01`,
-          end: `${this.currentYear}-${this.currentMonth}-${this.currentDay}`,
+          end: `${this.currentYear}-${monthValue || this.currentMonth}-${this.endOfMonth(monthValue || this.currentMonth)}`,
           qx: obj.code
         }
       } else {
         params = {
-          month: this.currentMonth,
+          month: monthValue || this.currentMonth,
           qx: obj.code
         }
       }
@@ -242,7 +262,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+    .tuijing--title {
+      font-size: inherit;
+      vertical-align: middle;
+    }
     .tuijing--container {
 
         display: flex;

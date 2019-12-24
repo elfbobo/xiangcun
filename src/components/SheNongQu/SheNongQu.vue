@@ -7,24 +7,27 @@
                         :finished="huan.first.finished"
                         :processing="huan.first.processing"
                         :delayed="huan.first.delayed"
-                        :title="`${title1}77项重点任务推进情况`"
+                        jiezhi
+                        :title="`77项重点任务推进情况`"
+                        @onChosenMonth="onChosenMonthHuan1"
                 ></huan>
                 <huan
                         ref="huan2"
                         :finished="huan.second.finished"
                         :processing="huan.second.processing"
                         :delayed="huan.second.delayed"
-                        :title="`${title2}77项重点任务推进情况`"
+                        :title="`77项重点任务推进情况`"
+                        @onChosenMonth="onChosenMonthHuan2"
                 ></huan>
             </div>
             <div class="shenongqu--mianji">
-                <mian-ji ref="mianji1" second-color="rgba(251,185,25,1)" :title="`${title1}涉农区重点任务推进排名`"></mian-ji>
-                <mian-ji ref="mianji2" :title="`${title2}各涉农区重点任务推进排名`" start-color="rgba(251,185,25,1)" second-color="rgba(4,244,251,1)"></mian-ji>
+                <mian-ji ref="mianji1" jiezhi second-color="rgba(251,185,25,1)" start-color="rgba(4,244,251,1)" end-color="rgba(4,244,251,1)" :title="`涉农区重点任务推进排名`" @onChosenMonth="onChosenMonthMianji1"></mian-ji>
+                <mian-ji ref="mianji2" :title="`各涉农区重点任务推进排名`" start-color="rgba(251,185,25,1)" second-color="rgba(4,244,251,1)" end-color="rgba(251,185,25,1)" @onChosenMonth="onChosenMonthMianji2"></mian-ji>
             </div>
         </div>
         <div class="shenongqu--right">
-            <tuijing-bar ref="bar1" :title="`${title1}重点任务推进情况`"></tuijing-bar>
-            <tuijing-bar ref="bar2" :title="`${title2}重点任务推进情况`"></tuijing-bar>
+            <tuijing-bar jiezhi ref="bar1" :title="`重点任务推进情况`"></tuijing-bar>
+            <tuijing-bar ref="bar2" :title="`重点任务推进情况`"></tuijing-bar>
         </div>
     </div>
 </template>
@@ -93,6 +96,39 @@ export default {
     this.getFixData(totalAfterData, this.resolveData, 'bar')
   },
   methods: {
+    onChosenMonthMianji1 (month) {
+      this.sendRequest(this.$store.state.dataDetail.urls.mianji.overall)
+        .then(({ status, data }) => {
+          if (status === 200) {
+            this.resolveData(data, 0, 'line')
+          }
+        })
+    },
+    onChosenMonthMianji2 (month) {
+      this.sendRequest(this.$store.state.dataDetail.urls.mianji.current, { month })
+        .then(({ status, data }) => {
+          if (status === 200) {
+            this.resolveData(data, 1, 'line')
+          }
+        })
+    },
+    onChosenMonthHuan1 (month) {
+      this.sendRequest(this.$store.state.dataDetail.urls.pie.overall)
+        .then(({ status, data }) => {
+          if (status === 200) {
+            this.resolveData(data, 0, 'huan')
+          }
+        })
+    },
+    onChosenMonthHuan2 (month) {
+      console.log(month)
+      this.sendRequest(this.$store.state.dataDetail.urls.pie.current, { month })
+        .then(({ status, data }) => {
+          if (status === 200) {
+            this.resolveData(data, 1, 'huan')
+          }
+        })
+    },
     getFixData (data = {}, callback = () => {
     }, type = '') {
       for (let i = 0; i < data.length; i++) {

@@ -1,6 +1,6 @@
 <template>
     <div class="mianji--container">
-        <chart-title>
+        <chart-title :jiezhi="!jiezhi" @onChosenMonth="onChosenMonth">
             {{title}}
         </chart-title>
         <div style="position: relative;flex: 1 1 auto;">
@@ -20,6 +20,8 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/axis'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/grid'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/visualMap'
 import ChartTitle from '../ChartTitle'
 import ChartMixins from '../ChartMixins'
 
@@ -37,7 +39,7 @@ export default {
     },
     secondColor: {
       type: [Boolean, String],
-      default: false
+      default: 'rgba(4,244,251,1)'
     },
     target: {
       type: [Boolean, Number],
@@ -63,6 +65,14 @@ export default {
     changeLine: {
       type: Boolean,
       default: false
+    },
+    jiezhi: {
+      type: Boolean,
+      default: false
+    },
+    endColor: {
+      type: [Boolean, String],
+      default: '#14c396'
     }
   },
   data: () => ({
@@ -73,6 +83,15 @@ export default {
         top: '10%',
         bottom: '20%'
       },
+      visualMap: {
+        show: false,
+        min: 0,
+        max: 10,
+        dimension: 0,
+        inRange: {
+          color: ['#4a657a', '#ef5055']
+        }
+      },
       xAxis: {
         type: 'category',
         splitLine: {
@@ -81,7 +100,7 @@ export default {
             color: 'rgba(23,76,110,0.2)'
           }
         },
-        boundaryGap: false,
+        // boundaryGap: false,
 
         axisLabel: {
           show: true,
@@ -119,7 +138,10 @@ export default {
       yAxis: {
         type: 'value',
         splitNumber: 10,
-
+        min: function (value) {
+          let min = Math.round((value.min - 10) / 10) * 10
+          return min
+        },
         splitLine: {
           show: true,
           lineStyle: {
@@ -166,42 +188,51 @@ export default {
         }
       },
       series: [{
-        type: 'line',
+        // type: 'line',
+        type: 'bar',
         data: [100, 100, 100, 100, 100, 100, 100, 100, 100],
-        areaStyle: {
-          color: '#04f4fb'
-        },
+        barWidth: '40%',
+        // areaStyle: {
+        //   color: '#04f4fb'
+        // },
         lineStyle: {
           color: '#04f4fb'
         },
         itemStyle: {
-          color: '#04f4fb',
-          opacity: 0
+          // color: '#04f4fb',
+          barBorderRadius: 50,
+          opacity: 100
         },
         emphasis: {
           itemStyle: {
-            color: '#ffffff',
+            // color: '#ffffff',
             opacity: 100,
             borderWidth: 5
           }
         }
+
       }]
     }
   }),
   mounted () {
     if (this.changeLine) this.options.grid.bottom = '30%'
-    this.options.series[0].areaStyle.color = this.setGradientColor(this.startColor, 'rgba(0,0,0,0)')
-    this.options.series[0].itemStyle.color = this.startColor
+    // this.options.series[0].areaStyle.color = this.setGradientColor(this.startColor, 'rgba(0,0,0,0)')
+    // this.options.series[0].itemStyle.color = this.startColor
     this.options.series[0].lineStyle.color = this.startColor
 
     let color = this.startColor
     let temp = color.split(',')
     temp[temp.length - 1] = '0.25)'
     this.options.tooltip.backgroundColor = temp.join(',')
+    this.options.visualMap.inRange.color = [this.endColor, this.startColor]
+
     this.setChartStyle()
     this.$refs.mianji.setChart()
   },
   methods: {
+    onChosenMonth (month) {
+      this.$emit('onChosenMonth', month)
+    },
     setGradientColor (start, end) {
       return new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
         {
@@ -234,7 +265,7 @@ export default {
           itemStyle: {
             opacity: 100
           },
-
+          boundaryGap: false,
           lineStyle: {
             type: 'dotted',
             color: this.secondColor || this.startColor

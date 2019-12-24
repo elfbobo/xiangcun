@@ -1,12 +1,7 @@
 <template>
   <div class="table--content--container">
-    <chart-title>
-      <template>
+    <chart-title :jiezhi="!jiezhi" @onChosenMonth="onChosenMonth">
         {{ title }}
-      </template>
-      <template slot="actions">
-      </template>
-
     </chart-title>
     <div class="icon-actions--container">
       <div class="icon-actions" v-for="(icon,ic) in icons" :key="'icons'+ic">
@@ -68,6 +63,10 @@ export default {
     arr: {
       type: [Boolean, Array],
       default: false
+    },
+    jiezhi: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
@@ -102,6 +101,9 @@ export default {
 
   },
   methods: {
+    onChosenMonth (month) {
+      this.$emit('onChosenMonth', month)
+    },
     transferIcon (num = 0) {
       switch (num) {
         case 1:

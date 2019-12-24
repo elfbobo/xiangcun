@@ -1,6 +1,6 @@
 <template>
     <div class="bar--container">
-        <chart-title subtitle="（按滞后任务数排名）">{{ title }}</chart-title>
+        <chart-title subtitle="（按滞后任务数排名）" :jiezhi="!jiezhi">{{ title }}</chart-title>
         <div style="flex: 1 1 auto;position: relative;">
             <chart-mixins ref="bar" :options="options"></chart-mixins>
         </div>
@@ -22,6 +22,10 @@ export default {
     title: {
       type: String,
       default: '推进情况'
+    },
+    jiezhi: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({

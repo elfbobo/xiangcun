@@ -1,11 +1,30 @@
 <template>
     <div class="router--container column">
         <div class="router--col column">
-            <mian-ji change-line ref="line1" smooth :line-width="0" left="3%" :title="title1"></mian-ji>
+            <mian-ji
+              change-line ref="line1"
+              jiezhi
+              smooth
+              :line-width="0"
+              left="3%"
+              :title="title1"
+              start-color="#1484c8"
+              second-color="rgba(251,185,25,1)"
+              @onChosenMonth="onChosenMonth1"
+            ></mian-ji>
         </div>
         <div class="router--col column">
-            <mian-ji change-line ref="line2" smooth :line-width="0" left="3%" :title="title2"
-                     start-color="rgba(251,185,25,1)"></mian-ji>
+            <mian-ji
+              change-line
+              ref="line2"
+              smooth
+              :line-width="0"
+              left="3%"
+              :title="title2"
+              start-color="#bb9528"
+              end-color="#1f72a3"
+              @onChosenMonth="onChosenMonth2"
+            ></mian-ji>
         </div>
     </div>
 </template>
@@ -27,14 +46,20 @@ export default {
       districtNames: 'dataDetail/districtNames'
     }),
     title1 () {
-      return `${this.currentYear}年1月至${this.currentMonth}月77项相关委办局重点任务推进情况`
+      return `77项相关委办局重点任务推进情况`
     },
     title2 () {
-      return `${this.currentYear}年${this.currentMonth}月77项相关委办局重点任务推进情况`
+      return `77项相关委办局重点任务推进情况`
     }
 
   },
   methods: {
+    onChosenMonth1 (month) {
+      this.sendRequest('line1', { begin: `${this.currentYear}-01-01`, end: `${this.currentYear}-${month}-${this.$endOfMonth(month)}` })
+    },
+    onChosenMonth2 (month) {
+      this.sendRequest('line2', { month: month })
+    },
     sendRequest (refName = '', params = {}) {
       axios({
         method: 'get',
@@ -43,6 +68,7 @@ export default {
       }).then(({ status, data }) => {
         if (status === 200) {
           if (!this.$refs[refName]) return
+          data = data.sort((a, b) => parseFloat(b.p) - parseFloat(a.p))
           const processed = data.reduce((prev, next) => {
             const v = parseFloat(next.p)
             return prev.concat({

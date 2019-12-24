@@ -1,6 +1,6 @@
 <template>
     <div class="huan--container">
-        <chart-title>
+        <chart-title :jiezhi="!jiezhi" @onChosenMonth="onChosenMonth">
             {{ title }}
         </chart-title>
         <div class="layout--row">
@@ -60,6 +60,10 @@ export default {
     delayed: {
       type: [Number, String],
       default: 3
+    },
+    jiezhi: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -107,6 +111,9 @@ export default {
     })
   },
   methods: {
+    onChosenMonth (month) {
+      this.$emit('onChosenMonth', month)
+    },
     setChart ({ finished, processing, delayed }) {
       this.options.series[0].data = []
       if (delayed) {

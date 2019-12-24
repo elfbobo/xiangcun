@@ -7,6 +7,7 @@ module.exports = {
   devServer: {
     port: 8080
   },
+  publicPath: './',
 
   chainWebpack: config => {
     config.resolve.alias

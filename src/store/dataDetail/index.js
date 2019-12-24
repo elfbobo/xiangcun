@@ -15,8 +15,8 @@ const state = {
     { name: '崇明区', code: 310151, alias: 'cmq', short: '崇明' }
   ],
   current: {
-    month: new Date().getMonth() === 0 ? 1 : new Date().getMonth(),
-    year: new Date().getFullYear(),
+    month: new Date().getMonth() === 0 ? 12 : new Date().getMonth(),
+    year: new Date().getMonth() === 0 ? new Date().getFullYear() - 1 : new Date().getFullYear(),
     day: new Date().getDate()
   },
   urls: {

@@ -1,10 +1,10 @@
 <template>
   <div class="table--container">
     <div class="table--content">
-      <table-content :title="title1" :districts="districts" id="tb1" :arr="dataArr1"></table-content>
+      <table-content :title="title1" jiezhi :districts="districts" id="tb1" :arr="dataArr1" @onChosenMonth="onChosenMonth1"></table-content>
     </div>
     <div class="table--content">
-      <table-content :title="title2" :districts="districts" id="tb2" strict :arr="dataArr2"></table-content>
+      <table-content :title="title2" :districts="districts" id="tb2" strict :arr="dataArr2" @onChosenMonth="onChosenMonth2"></table-content>
     </div>
   </div>
 </template>
@@ -41,10 +41,10 @@ export default {
       districtNames: 'dataDetail/zdrw'
     }),
     title1 () {
-      return `${this.currentYear}年1月至${this.currentMonth}月77项重点任务推进情况`
+      return `77项重点任务推进情况`
     },
     title2 () {
-      return `${this.currentYear}年${this.currentMonth}月77项重点任务推进情况`
+      return `77项重点任务推进情况`
     },
     districts () {
       return this.districtNames.reduce((prev, next) => {
@@ -58,6 +58,20 @@ export default {
     }
   },
   methods: {
+    onChosenMonth1 (month) {
+      this.sendRequest().then(data => {
+        this.dataArr1 = this.normalizeData(data)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    onChosenMonth2 (month) {
+      this.sendRequest({ month }).then(data => {
+        this.dataArr2 = this.normalizeData(data)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     normalizeData (obj = []) {
       return obj.reduce((prev, next) => {
         const [order, name] = next.name.split('-')

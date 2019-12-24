@@ -14,6 +14,13 @@ import 'swiper/css/swiper.css'
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 Vue.prototype.$http = http
+Vue.prototype.$endOfMonth = function (m = 0) {
+  switch (m) {
+    case 4:case 6:case 9:case 11: return 30
+    case 2: return 28
+    default: return 31
+  }
+}
 
 // axios.defaults.baseURL = `http://localhost:8081/api`
 // axios.defaults.timeout = 3000
