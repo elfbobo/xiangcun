@@ -80,7 +80,7 @@ export default {
         } else {
           this.processedArray = old
         }
-
+        this.currentPage = 1
         this.currentArray = this.processedArray.slice(0, this.pageNumber)
       }
     }

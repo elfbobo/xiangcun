@@ -1,7 +1,7 @@
 <template>
   <div @click.stop="toggleOptions">{{ current.month }}月
     <ul v-show="showOption">
-      <li v-for="(c,i) in monthsArr" :key="i" @click="onChosenMonth(c)">{{ c }}</li>
+      <li :class="{'disable-click': currentMonth < c}" v-for="(c,i) in monthsArr" :key="i" @click="onChosenMonth(c)">{{ c }}</li>
     </ul>
   </div>
 </template>
@@ -66,6 +66,7 @@ export default {
         font-size: .08rem;
         &:hover {
           background: #2e6da4;
+          cursor: pointer;
         }
       }
     }
@@ -85,5 +86,14 @@ export default {
       background: url("../assets/images/arrow1.png") no-repeat center center;
     }
   }
+  .disable-click {
+    pointer-events: none;
+    color: #8c8c8c;
+
+    &:hover{
+      cursor: none;
+    }
+  }
+
 
 </style>

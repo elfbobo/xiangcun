@@ -284,7 +284,7 @@ export default {
             fontSize: '20px',
             color: this.secondColor || this.startColor,
             formatter: '{c} %',
-            position: 'bottom'
+            position: 'top'
           }
         }
       }
