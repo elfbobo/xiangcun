@@ -137,9 +137,15 @@ export default {
       },
       yAxis: {
         type: 'value',
-        splitNumber: 10,
         min: function (value) {
-          let min = Math.round((value.min - 10) / 10) * 10
+          let min
+            if (value.min === 100) {
+                min = value.min - 10
+            } else if (value.min < 10) {
+                min = 10
+            } else {
+                min = Math.floor(value.min / 10) * 10
+            }
           return min
         },
         splitLine: {
@@ -154,7 +160,9 @@ export default {
             color: '#fff',
             fontSize: '7%'
           },
-          formatter: '{value} %'
+          formatter: function (value, index) {
+              return `${Math.floor(value)} %`
+          }
         },
         axisTick: {
           show: false,
@@ -270,7 +278,7 @@ export default {
           },
           boundaryGap: false,
           lineStyle: {
-            type: 'dotted',
+            type: 'dashed',
             color: this.secondColor || this.startColor
           },
           data: [{
@@ -282,9 +290,13 @@ export default {
           label: {
             show: true,
             fontSize: '20px',
+              fontWeight: 500,
             color: this.secondColor || this.startColor,
             formatter: '{c} %',
-            position: 'top'
+            position: 'top',
+              backgroundColor: 'rgba(0,0,0,0.6)',
+              padding: 10
+
           }
         }
       }

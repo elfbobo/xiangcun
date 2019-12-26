@@ -80,10 +80,8 @@ export default {
   data: () => ({
     options: {
       grid: {
-        left: '2%',
-        right: '2%',
-        bottom: '2%',
-        top: '2%'
+        left: 0,
+        right: 0
       },
       tooltip: {
         show: true,
@@ -95,7 +93,7 @@ export default {
       },
       series: [{
         type: 'pie',
-        radius: ['50%', '70%'],
+        radius: ['70%', '90%'],
         label: {
           normal: {
             show: false

@@ -77,7 +77,7 @@
                   <em>85 <i>个</i></em>
                   <span>美丽乡村示范村</span>
                 </div>
-                <div class="sy-total-line" @click.capture="linkTo('/hangpai')">
+                <div class="sy-total-line" @click.capture.stop="linkTo('/hangpai')">
                   <em>37 <i>个</i></em>
                   <span>乡村振兴示范村</span>
                 </div>

@@ -42,6 +42,7 @@ export default {
       },
       legend: {
         padding: [20, 10, 0, 10],
+          right: '10%',
         itemWidth: 10,
         itemGap: 120,
         itemHeight: 10,
